@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    buildToolsVersion BUILD_TOOLS_VERSION
+    defaultConfig {
+        applicationId "easy.share.adk"
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [umeng_app_key: "你替代的内容"]
+        }
+        debug {
+            manifestPlaceholders = [umeng_app_key: "你替代的内容"]
+        }
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'jxtapp.keystore'
+            keyPassword 'coinsight1234'
+            storeFile file('./jxtapp.keystore')
+            storePassword 'coinsight1234'
+        }
+
+        config {
+            keyAlias 'jxtapp.keystore'
+            keyPassword 'coinsight1234'
+            storeFile file('./jxtapp.keystore')
+            storePassword 'coinsight1234'
+        }
+    }
+
+}
+
+dependencies {
+    compile "com.android.support:appcompat-v7:$support_version"
+    compile project(':alipay')
+    compile project(':weixin')
+}
