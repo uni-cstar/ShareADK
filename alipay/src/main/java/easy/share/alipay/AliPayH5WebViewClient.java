@@ -3,6 +3,7 @@ package easy.share.alipay;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.text.TextUtils;
+import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -36,6 +37,7 @@ public class AliPayH5WebViewClient extends WebViewClient {
     @Deprecated
     @Override
     public boolean shouldOverrideUrlLoading(final WebView view, String url) {
+        Log.d("URL", url);
         if (!(url.startsWith("http") || url.startsWith("https"))) {
             return shouldOverrideUrlLoadingAfterAliPayCheck(view, url);
         }
@@ -44,7 +46,7 @@ public class AliPayH5WebViewClient extends WebViewClient {
             return shouldOverrideUrlLoadingAfterAliPayCheck(view, url);
         } else {
             PayTask payTask = new PayTask(mActivity);
-            new MyH5PayTask(payUrl, view).execute(payTask);
+            new MyH5PayTask(payUrl, view, url).execute(payTask);
             return true;
         }
 //        return checkAliPayH5Url(mActivity, view, url) || shouldOverrideUrlLoadingAfterAliPayCheck(view, url);
@@ -72,19 +74,20 @@ public class AliPayH5WebViewClient extends WebViewClient {
         if (TextUtils.isEmpty(payUrl)) {
             return false;
         } else {
-            new MyH5PayTask(payUrl, view).execute(payTask);
+            new MyH5PayTask(payUrl, view, url).execute(payTask);
             return true;
         }
     }
 
     private static class MyH5PayTask extends AsyncTask<PayTask, Integer, H5PayResultModel> {
 
-        String payUrl;
+        String payUrl, originalUrl;
         WebView mWebView;
 
-        MyH5PayTask(String url, WebView webView) {
+        MyH5PayTask(String url, WebView webView, String originalUrl) {
             this.payUrl = url;
             this.mWebView = webView;
+            this.originalUrl = originalUrl;
         }
 
         @Override
@@ -93,10 +96,20 @@ public class AliPayH5WebViewClient extends WebViewClient {
         }
 
         @Override
-        protected void onPostExecute(H5PayResultModel h5PayResultModel) {
-            if (!TextUtils.isEmpty(h5PayResultModel.getReturnUrl())) {
-                this.mWebView.loadUrl(h5PayResultModel.getReturnUrl());
+        protected void onPostExecute(H5PayResultModel payResult) {
+            if (!TextUtils.isEmpty(payResult.getReturnUrl())) {
+                this.mWebView.loadUrl(payResult.getReturnUrl());
+            } else {
+
+                this.mWebView.reload();
             }
         }
+
+//        9000——订单支付成功
+//        8000——正在处理中
+//        4000——订单支付失败
+//        5000——重复请求
+//        6001——用户中途取消
+//        6002——网络连接出错
     }
 }

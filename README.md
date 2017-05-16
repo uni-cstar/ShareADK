@@ -9,4 +9,6 @@
   [Sina](https://github.com/SupLuo/ShareADK/blob/master/sina/README.md)
   
   [Alipay](https://github.com/SupLuo/ShareADK/blob/master/alipay/README.md)
-  
+
+
+  待提供gradle依赖

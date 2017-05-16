@@ -18,3 +18,5 @@ android {
 dependencies {
     compile files('libs/alipaySdk-20170407.jar')
 }
+
+//apply from:'./bintray.gradle'
