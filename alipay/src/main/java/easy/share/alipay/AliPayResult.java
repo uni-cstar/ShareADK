@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import java.util.Map;
 
-public class PayResult {
+public class AliPayResult {
 
     private String resultStatus;
     private String result;
@@ -15,7 +15,7 @@ public class PayResult {
      *
      * @param rawResult
      */
-    public PayResult(Map<String, String> rawResult) {
+    public AliPayResult(Map<String, String> rawResult) {
         if (rawResult == null) {
             return;
         }
@@ -36,7 +36,7 @@ public class PayResult {
      *
      * @param rawResult
      */
-    public PayResult(String rawResult) {
+    public AliPayResult(String rawResult) {
         if (TextUtils.isEmpty(rawResult))
             return;
 
@@ -61,12 +61,12 @@ public class PayResult {
                 content.lastIndexOf("}"));
     }
 
-    public static PayResult wrap(Map<String, String> rawResult) {
-        return new PayResult(rawResult);
+    public static AliPayResult wrap(Map<String, String> rawResult) {
+        return new AliPayResult(rawResult);
     }
 
-    public static PayResult wrap(String rawResult) {
-        return new PayResult(rawResult);
+    public static AliPayResult wrap(String rawResult) {
+        return new AliPayResult(rawResult);
     }
 
     @Override

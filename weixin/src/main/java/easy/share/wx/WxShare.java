@@ -116,11 +116,11 @@ public class WxShare {
         return req;
     }
 
-    public void addShareListener(WxShareResponseListener listener) {
+    public static void addShareListener(WxShareResponseListener listener) {
         WxCallBackDelegate.CallBackHolder.getInstance().addShareListener(listener);
     }
 
-    public void removeShareListener(WxShareResponseListener listener) {
+    public static void removeShareListener(WxShareResponseListener listener) {
         WxCallBackDelegate.CallBackHolder.getInstance().removeShareListener(listener);
     }
 
@@ -318,7 +318,7 @@ public class WxShare {
     }
 
 
-    public static boolean senPayReq(Context context, String appId, BaseReq req) throws WxNotInstalledException, WxNotSupportVersionException {
+    public static boolean senReq(Context context, String appId, BaseReq req) throws WxNotInstalledException, WxNotSupportVersionException {
         return WxUtil.senReq(context, appId, req);
     }
 }

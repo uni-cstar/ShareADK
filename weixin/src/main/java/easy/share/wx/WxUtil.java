@@ -17,7 +17,7 @@ public class WxUtil {
         IWXAPI api = WXAPIFactory.createWXAPI(context, null);
         api.registerApp(appId);
         if (!api.isWXAppInstalled()) {
-            throw new WxNotInstalledException("Weixin not installed.");
+            throw new WxNotInstalledException("WeiXin not installed.");
         } else if (!api.isWXAppSupportAPI()) {
             throw new WxNotSupportVersionException("Not support version");
         }

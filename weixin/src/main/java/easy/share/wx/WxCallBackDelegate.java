@@ -17,6 +17,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+import easy.share.wx.iml.IWxEntry;
 import easy.share.wx.iml.WxLoginResponseListener;
 import easy.share.wx.iml.WxPayResponseListener;
 import easy.share.wx.iml.WxShareResponseListener;
@@ -25,7 +26,7 @@ import easy.share.wx.iml.WxShareResponseListener;
  * Created by Lucio on 17/5/12.
  */
 
-public class WxCallBackDelegate implements IWXAPIEventHandler {
+class WxCallBackDelegate implements IWXAPIEventHandler ,IWxEntry{
 
     Activity mActivity;
     IWXAPI api;

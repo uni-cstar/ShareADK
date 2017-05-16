@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion COMPILE_SDK_VERSION as int
-    buildToolsVersion BUILD_TOOLS_VERSION
+    compileSdkVersion 24
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
-        minSdkVersion MIN_SDK_VERSION as int
-        targetSdkVersion TARGET_SDK_VERSION as int
+        minSdkVersion 11
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
 
@@ -22,9 +22,7 @@ android {
 }
 
 dependencies {
-    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
-
-    compile "com.android.support:support-annotations:$support_version"
+    compile 'com.sina.weibo.sdk:core:2.0.3:openDefaultRelease@aar'
 }
 
 //apply from:'./bintray.gradle'

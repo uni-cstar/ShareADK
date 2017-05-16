@@ -19,7 +19,7 @@ public class WxPay {
      *
      * @param listener
      */
-    public void addPayListener(WxPayResponseListener listener) {
+    public static void addPayListener(WxPayResponseListener listener) {
         WxCallBackDelegate.CallBackHolder.getInstance().addPayListener(listener);
     }
 
@@ -28,7 +28,7 @@ public class WxPay {
      *
      * @param listener
      */
-    public void removePayListener(WxPayResponseListener listener) {
+    public static void removePayListener(WxPayResponseListener listener) {
         WxCallBackDelegate.CallBackHolder.getInstance().removePayListener(listener);
     }
 

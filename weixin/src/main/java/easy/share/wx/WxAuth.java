@@ -17,11 +17,11 @@ public class WxAuth {
 
     public static String ScopeForUserInfo = "snsapi_userinfo";
 
-    public void addAuthListener(WxLoginResponseListener listener) {
+    public static void addAuthListener(WxLoginResponseListener listener) {
         WxCallBackDelegate.CallBackHolder.getInstance().addAuthListener(listener);
     }
 
-    public void removeAuthListener(WxLoginResponseListener listener) {
+    public static void removeAuthListener(WxLoginResponseListener listener) {
         WxCallBackDelegate.CallBackHolder.getInstance().removeAuth(listener);
     }
 
@@ -35,10 +35,6 @@ public class WxAuth {
         req.scope = scope;
         req.state = state;
         WxUtil.senReq(context,appId,req);
-    }
-
-    public static boolean senPayReq(Context context, String appId, BaseReq req) throws WxNotInstalledException, WxNotSupportVersionException {
-        return WxUtil.senReq(context,appId,req);
     }
 
 

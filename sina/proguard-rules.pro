@@ -16,19 +16,7 @@
 #   public *;
 #}
 
-
-# 微信SDK 混淆设置
--keep class com.tencent.mm.opensdk.** {
-   *;
-}
--keep class com.tencent.wxop.** {
-   *;
-}
--keep class com.tencent.mm.sdk.** {
-   *;
-}
-
--keep public class easy.share.wx.**{
+-keep public class easy.share.sina.**{
     public *;
     protected *;
 }
