@@ -1,7 +1,6 @@
 package easy.share.adk;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,7 +16,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
-import easy.share.wx.WxPay;
+import easy.share.wx.WxAuth;
 
 public class WxShareActivity extends AppCompatActivity implements IWXAPIEventHandler {
 
@@ -58,9 +57,9 @@ public class WxShareActivity extends AppCompatActivity implements IWXAPIEventHan
         if (i > 0)
             return;
         i++;
-//        ShareCompat.sendReq(this, WxShare.shareText("nihao",WxShare.SendToSession),"wx4e4431394178d80d");
+//        ShareCompat.sendReq(this, WxShare.buildTextShareReq("nihao",WxShare.SendToSession),"wx4e4431394178d80d");
 
-        PayReq payReq = WxPay.buildPayReq("wx4e4431394178d80d", "1248812801", "wx20170511231543ebb3dcb7980994220904",
+        PayReq payReq = WxAuth.WxPay.buildPayReq("wx4e4431394178d80d", "1248812801", "wx20170511231543ebb3dcb7980994220904",
                 "Sign=WXPay", "msCr7rRJBIcre7T3DtSxigi85gh8A7gS", "1494515746", "C659BF2DB60BF1EB0DAF64499DACC877", WxShareActivity.class);
 //        try {
 //            WxPay.senReq(this,"wx4e4431394178d80d",payReq);

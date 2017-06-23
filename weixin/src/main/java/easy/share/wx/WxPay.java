@@ -52,14 +52,14 @@ public class WxPay {
     /**
      * 创建支付请求
      *
-     * @param appId
-     * @param partnerId
-     * @param prepayId
-     * @param packageValue
-     * @param nonceStr
-     * @param timeStamp
-     * @param sign
-     * @param callBackClassName
+     * @param appId             微信开放平台审核通过的应用APPID
+     * @param partnerId         微信支付分配的商户号
+     * @param prepayId          预支付交易会话ID,微信返回的支付交易会话ID
+     * @param packageValue      扩展字段，暂填写固定值Sign=WXPay
+     * @param nonceStr          随机字符串，不长于32位。推荐随机数生成算法
+     * @param timeStamp         时间戳，标准北京时间，时区为东八区，自1970年1月1日 0点0分0秒以来的秒数。注意：部分系统取到的值为毫秒级，需要转换成秒(10位数字)。
+     * @param sign              签名
+     * @param callBackClassName 回调activity名字，可以为空，则WxEntryActivity触发回调，也可以制定自定义activity名字
      * @return
      */
     public static PayReq buildPayReq(String appId, String partnerId, String prepayId, String packageValue, String nonceStr, String timeStamp, String sign, Class callBackClassName) {
@@ -95,7 +95,7 @@ public class WxPay {
      * @param nonceStr      随机字符串，不长于32位。推荐随机数生成算法
      * @param timeStamp     时间戳，标准北京时间，时区为东八区，自1970年1月1日 0点0分0秒以来的秒数。注意：部分系统取到的值为毫秒级，需要转换成秒(10位数字)。
      * @param sign          签名
-     * @param callBackClass 回调类名
+     * @param callBackClass 回调activity名字，可以为空，则WxEntryActivity触发回调，也可以制定自定义activity名字
      * @throws WxNotInstalledException      微信未安装
      * @throws WxNotSupportVersionException 微信版本不支持
      */
@@ -105,6 +105,6 @@ public class WxPay {
     }
 
     public static boolean senPayReq(Context context, String appId, BaseReq req) throws WxNotInstalledException, WxNotSupportVersionException {
-        return WxUtil.senReq(context,appId,req);
+        return WeiXin.senReq(context, appId, req);
     }
 }

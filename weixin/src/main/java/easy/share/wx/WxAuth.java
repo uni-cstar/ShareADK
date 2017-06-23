@@ -2,7 +2,6 @@ package easy.share.wx;
 
 import android.content.Context;
 
-import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 
 import easy.share.wx.iml.WxLoginResponseListener;
@@ -17,10 +16,18 @@ public class WxAuth {
 
     public static String ScopeForUserInfo = "snsapi_userinfo";
 
+    /**
+     * 添加Auth监听
+     * @param listener
+     */
     public static void addAuthListener(WxLoginResponseListener listener) {
         WxCallBackDelegate.CallBackHolder.getInstance().addAuthListener(listener);
     }
 
+    /**
+     * 移除Auth监听
+     * @param listener
+     */
     public static void removeAuthListener(WxLoginResponseListener listener) {
         WxCallBackDelegate.CallBackHolder.getInstance().removeAuth(listener);
     }
@@ -36,7 +43,7 @@ public class WxAuth {
         final SendAuth.Req req = new SendAuth.Req();
         req.scope = scope;
         req.state = state;
-        WxUtil.senReq(context, appId, req);
+        WeiXin.senReq(context, appId, req);
     }
 
 
@@ -65,7 +72,7 @@ public class WxAuth {
      * @param refreshToken 填写通过access_token获取到的refresh_token参数
      * @return
      */
-    public static String getRefreshToken(String appId, String refreshToken) {
+    public static String getRefreshTokenUrl(String appId, String refreshToken) {
         return String.format("https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=%s&grant_type=refresh_token&refresh_token=%s", appId, refreshToken);
     }
 

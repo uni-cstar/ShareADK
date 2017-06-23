@@ -58,6 +58,24 @@ public class WxShare {
     }
 
     /**
+     * 添加分享监听
+     *
+     * @param listener
+     */
+    public static void addShareListener(WxShareResponseListener listener) {
+        WxCallBackDelegate.CallBackHolder.getInstance().addShareListener(listener);
+    }
+
+    /**
+     * 移除分享监听
+     *
+     * @param listener
+     */
+    public static void removeShareListener(WxShareResponseListener listener) {
+        WxCallBackDelegate.CallBackHolder.getInstance().removeShareListener(listener);
+    }
+
+    /**
      * 生成唯一标识
      *
      * @param type
@@ -67,7 +85,14 @@ public class WxShare {
         return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
     }
 
-
+    /**
+     * 创建分享消息
+     *
+     * @param mediaObject
+     * @param title
+     * @param desc
+     * @return
+     */
     private static WXMediaMessage buildMediaMessage(final WXMediaMessage.IMediaObject mediaObject, final String title, final String desc) {
         WXMediaMessage msg = new WXMediaMessage(mediaObject);
         msg.title = title;
@@ -116,13 +141,6 @@ public class WxShare {
         return req;
     }
 
-    public static void addShareListener(WxShareResponseListener listener) {
-        WxCallBackDelegate.CallBackHolder.getInstance().addShareListener(listener);
-    }
-
-    public static void removeShareListener(WxShareResponseListener listener) {
-        WxCallBackDelegate.CallBackHolder.getInstance().removeShareListener(listener);
-    }
 
     /**
      * 分享文本
@@ -130,7 +148,7 @@ public class WxShare {
      * @param text    文本内容
      * @param shareTo 分享到
      */
-    public static SendMessageToWX.Req shareText(String text, @ShareTo int shareTo) {
+    public static SendMessageToWX.Req buildTextShareReq(String text, @ShareTo int shareTo) {
         WXTextObject textObj = new WXTextObject();
         textObj.text = text;
         WXMediaMessage msg = buildMediaMessage(textObj, null, text);// new WXMediaMessage();
@@ -143,21 +161,9 @@ public class WxShare {
      * @param shareTo 分享到
      * @return
      */
-    public static SendMessageToWX.Req shareImage(Context context, @DrawableRes int imageId, @ShareTo int shareTo) {
+    public static SendMessageToWX.Req buildImageShareReq(Context context, @DrawableRes int imageId, @ShareTo int shareTo) {
         Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), imageId);
-        return shareImage(context, imageId, shareTo, Bitmap.CompressFormat.PNG);
-    }
-
-    /**
-     * @param context 上下文
-     * @param imageId drawable 资源id
-     * @param shareTo 分享到
-     * @param format  缩略图压缩格式
-     * @return
-     */
-    public static SendMessageToWX.Req shareImage(Context context, @DrawableRes int imageId, @ShareTo int shareTo, final Bitmap.CompressFormat format) {
-        Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), imageId);
-        return shareImage(bmp, shareTo);
+        return buildImageShareReq(bmp, shareTo);
     }
 
     /**
@@ -165,7 +171,7 @@ public class WxShare {
      * @param shareTo 分享到
      * @return
      */
-    public static SendMessageToWX.Req shareImage(Bitmap bmp, @ShareTo int shareTo) {
+    public static SendMessageToWX.Req buildImageShareReq(Bitmap bmp, @ShareTo int shareTo) {
         WXImageObject imgObj = new WXImageObject(bmp);
         Bitmap thumbBmp = null;
         boolean needRecycle = false;
@@ -175,7 +181,7 @@ public class WxShare {
         } else {
             thumbBmp = bmp;
         }
-        return shareImage(imgObj, shareTo, thumbBmp, needRecycle);
+        return buildImageShareReq(imgObj, shareTo, thumbBmp, needRecycle);
     }
 
     /**
@@ -183,10 +189,10 @@ public class WxShare {
      * @param shareTo   分享到
      * @return
      */
-    public static SendMessageToWX.Req shareImage(String imagePath, @ShareTo int shareTo, byte[] thumbData) {
+    public static SendMessageToWX.Req buildImageShareReq(String imagePath, @ShareTo int shareTo, byte[] thumbData) {
         WXImageObject imgObj = new WXImageObject();
         imgObj.setImagePath(imagePath);
-        return shareImage(imgObj, shareTo, thumbData);
+        return buildImageShareReq(imgObj, shareTo, thumbData);
     }
 
 
@@ -196,9 +202,9 @@ public class WxShare {
      * @param thumbData 缩略图数据
      * @return
      */
-    public static SendMessageToWX.Req shareImage(byte[] imageData, @ShareTo int shareTo, byte[] thumbData) {
+    public static SendMessageToWX.Req buildImageShareReq(byte[] imageData, @ShareTo int shareTo, byte[] thumbData) {
         WXImageObject imgObj = new WXImageObject(imageData);
-        return shareImage(imgObj, shareTo, thumbData);
+        return buildImageShareReq(imgObj, shareTo, thumbData);
     }
 
     /**
@@ -207,12 +213,12 @@ public class WxShare {
      * @param thumbData 缩略图
      * @return
      */
-    private static SendMessageToWX.Req shareImage(WXImageObject imgObj, @ShareTo int shareTo, byte[] thumbData) {
+    private static SendMessageToWX.Req buildImageShareReq(WXImageObject imgObj, @ShareTo int shareTo, byte[] thumbData) {
         WXMediaMessage msg = buildMediaMessage(imgObj, null, null, thumbData);
         return buildReq("img", shareTo, msg);
     }
 
-    private static SendMessageToWX.Req shareImage(WXImageObject imgObj, @ShareTo int shareTo, Bitmap thumbBmp, boolean needRecycleThumbBmp) {
+    private static SendMessageToWX.Req buildImageShareReq(WXImageObject imgObj, @ShareTo int shareTo, Bitmap thumbBmp, boolean needRecycleThumbBmp) {
         WXMediaMessage msg = buildMediaMessage(imgObj, null, null, thumbBmp, needRecycleThumbBmp);
         return buildReq("img", shareTo, msg);
     }
@@ -227,22 +233,22 @@ public class WxShare {
      * @param shareTo   分享到
      * @return
      */
-    public static SendMessageToWX.Req shareMusic(String musicUrl, String title, String desc, byte[] thumbData, @ShareTo int shareTo) {
+    public static SendMessageToWX.Req buildMusicShareReq(String musicUrl, String title, String desc, byte[] thumbData, @ShareTo int shareTo) {
         WXMusicObject music = new WXMusicObject();
         music.musicUrl = musicUrl;
         WXMediaMessage msg = buildMediaMessage(music, title, desc, thumbData);
         return buildReq("music", shareTo, msg);
     }
 
-    public static SendMessageToWX.Req shareMusic(String musicUrl, String title, String desc, Bitmap thumbData, boolean needRecycleThumbBmp, @ShareTo int shareTo) {
+    public static SendMessageToWX.Req buildMusicShareReq(String musicUrl, String title, String desc, Bitmap thumbData, boolean needRecycleThumbBmp, @ShareTo int shareTo) {
         WXMusicObject music = new WXMusicObject();
         music.musicUrl = musicUrl;
         WXMediaMessage msg = buildMediaMessage(music, title, desc, thumbData, needRecycleThumbBmp);
         return buildReq("music", shareTo, msg);
     }
 
-    public static SendMessageToWX.Req shareVideo(String videoUrl, String title, String desc, @ShareTo int shareTo) {
-        return shareVideo(videoUrl, title, desc, null, shareTo);
+    public static SendMessageToWX.Req buildVideoShareReq(String videoUrl, String title, String desc, @ShareTo int shareTo) {
+        return buildVideoShareReq(videoUrl, title, desc, null, shareTo);
     }
 
     /**
@@ -255,7 +261,7 @@ public class WxShare {
      * @param shareTo
      * @return
      */
-    public static SendMessageToWX.Req shareVideo(String videoUrl, String title, String desc, @Nullable byte[] thumbData, @ShareTo int shareTo) {
+    public static SendMessageToWX.Req buildVideoShareReq(String videoUrl, String title, String desc, @Nullable byte[] thumbData, @ShareTo int shareTo) {
         WXVideoObject video = new WXVideoObject();
         video.videoUrl = videoUrl;
 
@@ -263,7 +269,7 @@ public class WxShare {
         return buildReq("video", shareTo, msg);
     }
 
-    public static SendMessageToWX.Req shareVideo(String videoUrl, String title, String desc, Bitmap thumbData, boolean needRecycleThumbBmp, @ShareTo int shareTo) {
+    public static SendMessageToWX.Req buildVideoShareReq(String videoUrl, String title, String desc, Bitmap thumbData, boolean needRecycleThumbBmp, @ShareTo int shareTo) {
         WXVideoObject video = new WXVideoObject();
         video.videoUrl = videoUrl;
 
@@ -271,14 +277,14 @@ public class WxShare {
         return buildReq("video", shareTo, msg);
     }
 
-    public static SendMessageToWX.Req shareWebPage(String webPageUrl, String title, String desc, byte[] thumbData, @ShareTo int shareTo) {
+    public static SendMessageToWX.Req buildWebPageShare(String webPageUrl, String title, String desc, byte[] thumbData, @ShareTo int shareTo) {
         WXWebpageObject webpage = new WXWebpageObject();
         webpage.webpageUrl = webPageUrl;
         WXMediaMessage msg = buildMediaMessage(webpage, title, desc, thumbData);
         return buildReq("webpage", shareTo, msg);
     }
 
-    public static SendMessageToWX.Req shareWebPage(String webPageUrl, String title, String desc, Bitmap thumbData, boolean needRecycleThumbBmp, @ShareTo int shareTo) {
+    public static SendMessageToWX.Req buildWebPageShare(String webPageUrl, String title, String desc, Bitmap thumbData, boolean needRecycleThumbBmp, @ShareTo int shareTo) {
         WXWebpageObject webpage = new WXWebpageObject();
         webpage.webpageUrl = webPageUrl;
         WXMediaMessage msg = buildMediaMessage(webpage, title, desc, thumbData, needRecycleThumbBmp);
@@ -305,20 +311,19 @@ public class WxShare {
      * @param path       小程序的path
      * @return
      */
-    public static SendMessageToWX.Req shareMiniProgram(String webPageUrl, String userName, String path, String title, String desc, byte[] thumbData) {
+    public static SendMessageToWX.Req buildMiniProgramShare(String webPageUrl, String userName, String path, String title, String desc, byte[] thumbData) {
         WXMiniProgramObject miniProgramObject = buildMiniProgramMsg(webPageUrl, userName, path);
         WXMediaMessage msg = buildMediaMessage(miniProgramObject, title, desc, thumbData);
         return buildReq("webpage", SendToSession, msg);
     }
 
-    public static SendMessageToWX.Req shareMiniProgram(String webPageUrl, String userName, String path, String title, String desc, Bitmap thumbData, boolean needRecycleThumbBmp) {
+    public static SendMessageToWX.Req buildMiniProgramShare(String webPageUrl, String userName, String path, String title, String desc, Bitmap thumbData, boolean needRecycleThumbBmp) {
         WXMiniProgramObject miniProgramObject = buildMiniProgramMsg(webPageUrl, userName, path);
         WXMediaMessage msg = buildMediaMessage(miniProgramObject, title, desc, thumbData, needRecycleThumbBmp);
         return buildReq("webpage", SendToSession, msg);
     }
 
-
     public static boolean senReq(Context context, String appId, BaseReq req) throws WxNotInstalledException, WxNotSupportVersionException {
-        return WxUtil.senReq(context, appId, req);
+        return WeiXin.senReq(context, appId, req);
     }
 }

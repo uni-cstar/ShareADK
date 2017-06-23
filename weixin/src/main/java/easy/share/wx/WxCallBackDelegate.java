@@ -2,6 +2,8 @@ package easy.share.wx;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
@@ -26,10 +28,11 @@ import easy.share.wx.iml.WxShareResponseListener;
  * Created by Lucio on 17/5/12.
  */
 
-class WxCallBackDelegate implements IWXAPIEventHandler ,IWxEntry{
+class WxCallBackDelegate implements IWXAPIEventHandler, IWxEntry {
 
     Activity mActivity;
     IWXAPI api;
+    String mAppId;
     static final String TAG = "WxCallBackDelegate";
 
     /**
@@ -40,8 +43,16 @@ class WxCallBackDelegate implements IWXAPIEventHandler ,IWxEntry{
      */
     public WxCallBackDelegate(Activity activity, String appId) {
         mActivity = activity;
-        api = WXAPIFactory.createWXAPI(activity, appId);
-        api.handleIntent(activity.getIntent(), this);
+        mAppId = appId;
+    }
+
+    /**
+     * 在WxEntryActivity的{@link Activity#onCreate(Bundle)}方法中调用
+     */
+    @Override
+    public void onActivityCreate() {
+        api = WXAPIFactory.createWXAPI(mActivity, mAppId);
+        api.handleIntent(mActivity.getIntent(), this);
     }
 
     /**

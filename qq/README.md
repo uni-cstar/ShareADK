@@ -45,3 +45,6 @@
     # 登陆
          获取用户Token:`QQAction.login(QQLoginListener listener);`
          获取用户信息:`void loginForUserInfo(QQUserInfoListener listener);`
+
+
+    #备注  QQ不能分享纯文本和纯图片

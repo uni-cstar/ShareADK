@@ -8,5 +8,7 @@ import android.content.Intent;
 
 public interface IWxEntry {
 
+    void onActivityCreate();
+
     void onNewIntent(Intent intent);
 }
