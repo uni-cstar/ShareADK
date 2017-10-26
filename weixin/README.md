@@ -54,6 +54,7 @@
         ```
 
     # 分享
+    ** 注意：微信对缩略图大小有限制，因此缩略图过大，会导致分享不成功
         分享相关的操作均在文件WxShare中提供
         1.根据需要，调用`WxShare.addShareListener(WxShareResponseListener listener)`增加监听
         2.调用WxShare.ShareXXXX方法，得到一个SendMessageToWX.Req请求

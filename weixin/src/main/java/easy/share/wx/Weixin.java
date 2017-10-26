@@ -43,8 +43,8 @@ public class WeiXin {
      * @param appId
      * @param req
      * @return
-     * @throws WxNotInstalledException
-     * @throws WxNotSupportVersionException
+     * @throws WxNotInstalledException 微信未安装
+     * @throws WxNotSupportVersionException 微信版本不支持
      */
     public static boolean senReq(Context context, String appId, BaseReq req) throws WxNotInstalledException, WxNotSupportVersionException {
         IWXAPI api = checkWxApp(context, appId);

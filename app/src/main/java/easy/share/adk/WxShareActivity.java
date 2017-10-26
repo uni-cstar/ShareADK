@@ -1,6 +1,7 @@
 package easy.share.adk;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,6 +18,9 @@ import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import easy.share.wx.WxAuth;
+import easy.share.wx.WxNotInstalledException;
+import easy.share.wx.WxNotSupportVersionException;
+import easy.share.wx.WxPay;
 
 public class WxShareActivity extends AppCompatActivity implements IWXAPIEventHandler {
 
@@ -29,8 +33,8 @@ public class WxShareActivity extends AppCompatActivity implements IWXAPIEventHan
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        api = WXAPIFactory.createWXAPI(this, "wx4e4431394178d80d", false);
-        api.registerApp("wx4e4431394178d80d");
+        api = WXAPIFactory.createWXAPI(this, "wx52d54b3771fb5594", false);
+        api.registerApp("wx52d54b3771fb5594");
         api.handleIntent(getIntent(), this);
 
         setContentView(R.layout.activity_wx_share);
@@ -57,16 +61,18 @@ public class WxShareActivity extends AppCompatActivity implements IWXAPIEventHan
         if (i > 0)
             return;
         i++;
-//        ShareCompat.sendReq(this, WxShare.buildTextShareReq("nihao",WxShare.SendToSession),"wx4e4431394178d80d");
+//        ShareCompat.sendReq(this, WxShare.buildTextShareReq("nihao",WxShare.SendToSession),"wx52d54b3771fb5594");
 
-        PayReq payReq = WxAuth.WxPay.buildPayReq("wx4e4431394178d80d", "1248812801", "wx20170511231543ebb3dcb7980994220904",
-                "Sign=WXPay", "msCr7rRJBIcre7T3DtSxigi85gh8A7gS", "1494515746", "C659BF2DB60BF1EB0DAF64499DACC877", WxShareActivity.class);
-//        try {
-//            WxPay.senReq(this,"wx4e4431394178d80d",payReq);
+        PayReq payReq = WxPay.buildPayReq("wx52d54b3771fb5594", "1486542682", "wx20170805232015860a8024ee0033299295",
+                "Sign=WXPay", "tCFT3aACYJD4h0Zd", "1501946415", "16C0EE6C6A065627748D8BAEAC495BE5", WxShareActivity.class);
+        try {
+            WxPay.senPayReq(this,"wx52d54b3771fb5594",payReq);
 //            ShareCompat.sendPayReq(this, payReq, WxShareActivity.class.getName());
-//        } catch (PackageManager.NameNotFoundException e) {
-//            e.printStackTrace();
-//        }
+        }catch (WxNotInstalledException e) {
+            e.printStackTrace();
+        } catch (WxNotSupportVersionException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -85,6 +91,6 @@ public class WxShareActivity extends AppCompatActivity implements IWXAPIEventHan
 
     @Override
     public void onResp(BaseResp baseResp) {
-        Log.d("WxShareActivity", baseResp.toString());
+        Log.d("WxShareActivity", baseResp.errCode + baseResp.errStr);
     }
 }

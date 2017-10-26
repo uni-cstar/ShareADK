@@ -35,7 +35,7 @@ public class SinaWb {
      * @param scope       应用对应的权限，可直接设置成空即可。
      *                    详情请查看{@link #SCOPE} 中对应的注释。
      */
-    public void register(Context context, String appKey, String redirectUrl, String scope) {
+    public static void register(Context context, String appKey, String redirectUrl, String scope) {
         WbSdk.install(context.getApplicationContext(), new AuthInfo(context.getApplicationContext(), appKey, redirectUrl, scope));
     }
 

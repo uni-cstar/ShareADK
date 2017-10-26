@@ -18,7 +18,7 @@ public class WxAuth {
 
     /**
      * 添加Auth监听
-     * @param listener
+     * @param listener 参数
      */
     public static void addAuthListener(WxLoginResponseListener listener) {
         WxCallBackDelegate.CallBackHolder.getInstance().addAuthListener(listener);
@@ -33,6 +33,8 @@ public class WxAuth {
     }
 
     /**
+     * @param context
+     * @param appId
      * @param scope 应用授权作用域，如获取用户个人信息则填写snsapi_userinfo
      * @param state 用于保持请求和回调的状态，授权请求后原样带回给第三方。该参数可用于防止csrf攻击（跨站请求伪造攻击），建议第三方带上该参数，可设置为简单的随机数加session进行校验
      * @throws WxNotInstalledException 微信未安装

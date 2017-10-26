@@ -25,20 +25,6 @@
                     }
         }
 
-        ```
-
-        在需要引入SDK的module目录的build.gradle中引入依赖
-        ```
-        dependencies {
-            compile 'com.sina.weibo.sdk:core:2.0.3:openDefaultRelease@aar'
-        }
-        ```
-
-        //```
-        //dependencies {
-        //    compile 'com.sina.weibo.sdk:core:2.0.3:openDefaultRelease@aar'
-        //}
-        //```
 
     # 注册
         在使用微博相关功能之前，必须进行注册，在合适的地方调用`SinaWb.register(Context context, String appKey, String redirectUrl, String scope)`
