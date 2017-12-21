@@ -2,7 +2,9 @@ package easy.share.alipay;
 
 import android.app.Activity;
 
+import com.alipay.sdk.app.H5PayCallback;
 import com.alipay.sdk.app.PayTask;
+import com.alipay.sdk.util.H5PayResultModel;
 
 /**
  * Created by Lucio on 17/5/4.
@@ -70,6 +72,57 @@ public final class AliPay {
     public static AliPayResult payV2(Activity activity, String orderInfo, boolean showLoading) {
         PayTask payTask = new PayTask(activity);
         return AliPayResult.wrap(payTask.payV2(orderInfo, showLoading));
+    }
+
+    /**
+     * 拦截支付宝h5支付
+     *
+     * @param activity
+     * @param url      待过滤拦截的 URL
+     * @param callback 支付回调
+     */
+    public static void h5PayUrlIntercept(Activity activity, String url, AliH5PayCallback callback) {
+        h5PayUrlIntercept(activity, url, true, callback);
+    }
+
+    /**
+     * 拦截支付宝h5支付
+     *
+     * @param activity
+     * @param url              待过滤拦截的 URL
+     * @param isShowPayLoading 是否出现loading
+     * @param callback         支付回调
+     */
+    public static void h5PayUrlIntercept(final Activity activity, String url, boolean isShowPayLoading, final AliH5PayCallback callback) {
+        if (!(url.startsWith("http") || url.startsWith("https"))) {
+            callback.onNotAliH5PayResult(url);
+            return;
+        }
+
+        /**
+         * 推荐采用的新的二合一接口(h5PayUrlIntercept),只需调用一次
+         */
+        final PayTask task = new PayTask(activity);
+        boolean isIntercepted = task.payInterceptorWithUrl(url, isShowPayLoading, new H5PayCallback() {
+            @Override
+            public void onPayResult(final H5PayResultModel result) {
+                // 支付结果返回
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onPayResult(AliH5PayResult.createFromH5PayResultModel(result));
+                    }
+                });
+            }
+        });
+
+        /**
+         * 判断是否成功拦截
+         * 若成功拦截，则无需继续加载该URL；否则继续加载
+         */
+        if (!isIntercepted) {
+            callback.onNotAliH5PayResult(url);
+        }
     }
 
 }

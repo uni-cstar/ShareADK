@@ -27,4 +27,4 @@ dependencies {
     compile "com.android.support:support-annotations:$support_version"
 }
 
-apply from:'./bintray.gradle'
+//apply from:'./bintray.gradle'

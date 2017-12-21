@@ -25,4 +25,4 @@ dependencies {
     compile 'com.sina.weibo.sdk:core:2.0.3:openDefaultRelease@aar'
 }
 
-//apply from:'./bintray.gradle'
+apply from:'./bintray.gradle'

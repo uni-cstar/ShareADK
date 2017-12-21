@@ -14,9 +14,6 @@ package easy.share.adk;
 //
 //}
 
-import com.alipay.sdk.app.PayTask;
-import com.alipay.sdk.util.H5PayResultModel;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -30,11 +27,10 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.RenderPriority;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
-import easy.share.alipay.AliPayH5WebViewClient;
+import easy.share.alipay.AliH5PayWebViewClient;
 
 public class MainActivity extends Activity {
 
@@ -45,7 +41,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         String url = null;
         url = "https://www.taobao.com";
         if (TextUtils.isEmpty(url)) {
@@ -107,7 +102,7 @@ public class MainActivity extends Activity {
         super.onConfigurationChanged(newConfig);
     }
 
-    private class MyWebViewClient extends AliPayH5WebViewClient {
+    private class MyWebViewClient extends AliH5PayWebViewClient {
 
         public MyWebViewClient(Activity activity) {
             super(activity);
@@ -117,7 +112,7 @@ public class MainActivity extends Activity {
         public boolean shouldOverrideUrlLoadingAfterAliPayCheck(WebView view, String url) {
             if (!(url.startsWith("http") || url.startsWith("https"))) {
                 return true;
-            }else{
+            } else {
                 view.loadUrl(url);
                 return true;
             }
