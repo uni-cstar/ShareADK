@@ -2,7 +2,12 @@
 
     # 混淆
         ```
-            -libraryjars libs/alipaySdk-20170407.jar
+
+            # easy 库文件
+            -keep public easy.share.alipay.**{
+               public *;
+               protected *;
+            }
 
             -keep class com.alipay.android.app.IAlixPay{*;}
             -keep class com.alipay.android.app.IAlixPay$Stub{*;}
@@ -10,13 +15,19 @@
             -keep class com.alipay.android.app.IRemoteServiceCallback$Stub{*;}
             -keep class com.alipay.sdk.app.PayTask{ public *;}
             -keep class com.alipay.sdk.app.AuthTask{ public *;}
-
-            -keep public easy.share.alipay.**{
-               public *;
-               protected *;
+            -keep class com.alipay.sdk.app.H5PayCallback {
+                <fields>;
+                <methods>;
             }
+            -keep class com.alipay.android.phone.mrpc.core.** { *; }
+            -keep class com.alipay.apmobilesecuritysdk.** { *; }
+            -keep class com.alipay.mobile.framework.service.annotation.** { *; }
+            -keep class com.alipay.mobilesecuritysdk.face.** { *; }
+            -keep class com.alipay.tscenter.biz.rpc.** { *; }
+            -keep class org.json.alipay.** { *; }
+            -keep class com.alipay.tscenter.** { *; }
+            -keep class com.ta.utdid2.** { *;}
+            -keep class com.ut.device.** { *;}
         ```
-    # 支付
-        见AliPay中提供的方法，支付信息出于安全性，必须来源于服务器，因此本地处理的事情较少。
-        AliPayH5WebViewClient：用于H5支付转Native支付，在{@link #shouldOverrideUrlLoadingAfterAliPayCheck(WebView, String)}方法中处理本该在{@link #shouldOverrideUrlLoading(WebView, String)}执行的逻辑
-        此方法有一个问题：h5开始支付之后，会显示loading状态，在支付界面如果取消支付，网页会无法或者支付状态导致一直处于loading状态
+    # 支付及h5拦截支付，见AliPay文件定义的方法
+
