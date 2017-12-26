@@ -28,8 +28,7 @@ android {
 
 dependencies {
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
-
-    compile "com.android.support:support-annotations:$support_version"
+    provided "com.android.support:support-annotations:$support_version"
 }
 
-//apply from:'./bintray.gradle'
+apply from:'./bintray.gradle'

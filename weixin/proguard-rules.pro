@@ -30,7 +30,7 @@
    *;
 }
 
--keep public class easy.share.wx.**{
+-keep class easy.share.wx.**{
     public *;
     protected *;
 }

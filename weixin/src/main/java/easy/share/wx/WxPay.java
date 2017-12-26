@@ -49,8 +49,24 @@ public class WxPay {
      * @return
      */
     public static PayReq buildPayReq(String appId, String partnerId, String prepayId, String packageValue, String nonceStr, String timeStamp, String sign) {
-        PayReq req = new WxPayReq(appId, partnerId, prepayId, packageValue, nonceStr, timeStamp, sign);
-        return req;
+        return new WxPayReq(appId, partnerId, prepayId, packageValue, nonceStr, timeStamp, sign);
+    }
+
+    /**
+     * 创建支付请求
+     *
+     * @param appId         微信开放平台审核通过的应用APPID
+     * @param partnerId     微信支付分配的商户号
+     * @param prepayId      预支付交易会话ID,微信返回的支付交易会话ID
+     * @param packageValue  扩展字段，暂填写固定值Sign=WXPay
+     * @param nonceStr      随机字符串，不长于32位。推荐随机数生成算法
+     * @param timeStamp     时间戳，标准北京时间，时区为东八区，自1970年1月1日 0点0分0秒以来的秒数。注意：部分系统取到的值为毫秒级，需要转换成秒(10位数字)。
+     * @param sign          签名
+     * @param callBackClass 回调activity，可以为空，则WxPayEntryActivity触发回调，也可以制定自定义activity名字
+     * @return
+     */
+    public static PayReq buildPayReq(String appId, String partnerId, String prepayId, String packageValue, String nonceStr, String timeStamp, String sign, Class callBackClass) {
+        return buildPayReq(appId, partnerId, prepayId, packageValue, nonceStr, timeStamp, sign, callBackClass.getName());
     }
 
     /**
@@ -63,12 +79,11 @@ public class WxPay {
      * @param nonceStr          随机字符串，不长于32位。推荐随机数生成算法
      * @param timeStamp         时间戳，标准北京时间，时区为东八区，自1970年1月1日 0点0分0秒以来的秒数。注意：部分系统取到的值为毫秒级，需要转换成秒(10位数字)。
      * @param sign              签名
-     * @param callBackClassName 回调activity名字，可以为空，则WxEntryActivity触发回调，也可以制定自定义activity名字
+     * @param callBackClassName 回调activity名字，可以为空，则WxPayEntryActivity触发回调，也可以制定自定义activity名字
      * @return
      */
-    public static PayReq buildPayReq(String appId, String partnerId, String prepayId, String packageValue, String nonceStr, String timeStamp, String sign, Class callBackClassName) {
-        PayReq req = new WxPayReq(appId, partnerId, prepayId, packageValue, nonceStr, timeStamp, sign, callBackClassName.getName());
-        return req;
+    public static PayReq buildPayReq(String appId, String partnerId, String prepayId, String packageValue, String nonceStr, String timeStamp, String sign, String callBackClassName) {
+        return new WxPayReq(appId, partnerId, prepayId, packageValue, nonceStr, timeStamp, sign, callBackClassName);
     }
 
     /**
@@ -130,8 +145,17 @@ public class WxPay {
      * @param webView
      */
     public static void h5PayUrlIntercept(String url, String referer, WebView webView) {
-        Map<String, String> extraHeaders = new HashMap<String, String>();
-        extraHeaders.put("Referer", "https://paytest.ucuxin.com");// "http://wxpay.wxutil.com");
+        h5PayUrlIntercept(url, referer, webView, new HashMap<String, String>());
+    }
+
+    /**
+     * @param url          目标链接
+     * @param referer      商户申请H5时提交的授权域名
+     * @param webView
+     * @param extraHeaders 客户端本身要添加的header
+     */
+    public static void h5PayUrlIntercept(String url, String referer, WebView webView, Map<String, String> extraHeaders) {
+        extraHeaders.put("Referer", referer);// "http://wxpay.wxutil.com");
         webView.loadUrl(url, extraHeaders);
     }
 

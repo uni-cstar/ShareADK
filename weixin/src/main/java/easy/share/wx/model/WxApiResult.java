@@ -4,7 +4,7 @@ package easy.share.wx.model;
  * Created by Lucio on 17/5/12.
  */
 
-public class WxApiResult {
+class WxApiResult {
 
     public int errcode;
 
