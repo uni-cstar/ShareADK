@@ -1,5 +1,7 @@
 package easy.share.wx.iml;
 
+import android.app.Activity;
+
 import com.tencent.mm.opensdk.modelpay.PayResp;
 
 /**
@@ -8,6 +10,11 @@ import com.tencent.mm.opensdk.modelpay.PayResp;
 
 public interface WxPayResponseListener extends WxResponseListener {
 
-    void onWxPaySuccess(PayResp resp);
+    /**
+     *
+     * @param activity WxCallBackDelegate中包含的activity，通常指包名wxapi目录下定义的微信所需的activity
+     * @param resp
+     */
+    void onWxPaySuccess(Activity activity, PayResp resp);
 
 }

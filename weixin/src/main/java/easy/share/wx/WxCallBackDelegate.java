@@ -3,7 +3,6 @@ package easy.share.wx;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
@@ -103,9 +102,9 @@ class WxCallBackDelegate implements IWXAPIEventHandler, IWxEntry {
         String errorMsg = pay.errStr;
         if (errorCode == BaseResp.ErrCode.ERR_OK) {
             //支付成功
-            CallBackHolder.getInstance().notifyPaySuccess(pay);
+            CallBackHolder.getInstance().notifyPaySuccess(mActivity, pay);
         } else {
-            CallBackHolder.getInstance().notifyPayError(errorCode, errorMsg);
+            CallBackHolder.getInstance().notifyPayError(mActivity, errorCode, errorMsg);
         }
 
     }
@@ -120,9 +119,9 @@ class WxCallBackDelegate implements IWXAPIEventHandler, IWxEntry {
         String errorMsg = sendResp.errStr;
         if (errorCode == BaseResp.ErrCode.ERR_OK) {
             //分享成功
-            CallBackHolder.getInstance().notifyShareSuccess(sendResp);
+            CallBackHolder.getInstance().notifyShareSuccess(mActivity, sendResp);
         } else {
-            CallBackHolder.getInstance().notifyShareError(errorCode, errorMsg);
+            CallBackHolder.getInstance().notifyShareError(mActivity, errorCode, errorMsg);
         }
     }
 
@@ -139,11 +138,10 @@ class WxCallBackDelegate implements IWXAPIEventHandler, IWxEntry {
             //用户同意
 //            String code = authResp.code;
 //            String state = authResp.state;
-            CallBackHolder.getInstance().notifyAuthSuccess(authResp);
+            CallBackHolder.getInstance().notifyAuthSuccess(mActivity, authResp);
         } else {
-            CallBackHolder.getInstance().notifyAuthError(errorCode, errorMsg);
+            CallBackHolder.getInstance().notifyAuthError(mActivity, errorCode, errorMsg);
         }
-
     }
 
 
@@ -183,15 +181,15 @@ class WxCallBackDelegate implements IWXAPIEventHandler, IWxEntry {
             mLoginListeners.remove(listener);
         }
 
-        void notifyAuthSuccess(SendAuth.Resp data) {
+        void notifyAuthSuccess(Activity activity, SendAuth.Resp data) {
             for (WxLoginResponseListener item : mLoginListeners) {
-                item.onWxLoginSuccess(data);
+                item.onWxLoginSuccess(activity, data);
             }
         }
 
-        void notifyAuthError(int code, String msg) {
+        void notifyAuthError(Activity activity, int code, String msg) {
             for (WxLoginResponseListener item : mLoginListeners) {
-                item.onWxCallBackError(code, msg);
+                item.onWxCallBackError(activity, code, msg);
             }
         }
 
@@ -211,15 +209,15 @@ class WxCallBackDelegate implements IWXAPIEventHandler, IWxEntry {
             mShareListeners.remove(listener);
         }
 
-        void notifyShareSuccess(SendMessageToWX.Resp data) {
+        void notifyShareSuccess(Activity activity, SendMessageToWX.Resp data) {
             for (WxShareResponseListener item : mShareListeners) {
-                item.onWxShareSuccess(data);
+                item.onWxShareSuccess(activity, data);
             }
         }
 
-        void notifyShareError(int code, String msg) {
+        void notifyShareError(Activity activity, int code, String msg) {
             for (WxShareResponseListener item : mShareListeners) {
-                item.onWxCallBackError(code, msg);
+                item.onWxCallBackError(activity, code, msg);
             }
         }
 
@@ -238,15 +236,15 @@ class WxCallBackDelegate implements IWXAPIEventHandler, IWxEntry {
             mPayListeners.remove(listener);
         }
 
-        void notifyPaySuccess(PayResp data) {
+        void notifyPaySuccess(Activity activity, PayResp data) {
             for (WxPayResponseListener item : mPayListeners) {
-                item.onWxPaySuccess(data);
+                item.onWxPaySuccess(activity, data);
             }
         }
 
-        void notifyPayError(int code, String msg) {
+        void notifyPayError(Activity activity, int code, String msg) {
             for (WxPayResponseListener item : mPayListeners) {
-                item.onWxCallBackError(code, msg);
+                item.onWxCallBackError(activity, code, msg);
             }
         }
     }

@@ -1,5 +1,7 @@
 package easy.share.wx.iml;
 
+import android.app.Activity;
+
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 
 /**
@@ -8,6 +10,11 @@ import com.tencent.mm.opensdk.modelmsg.SendAuth;
 
 public interface WxLoginResponseListener extends WxResponseListener {
 
-    void onWxLoginSuccess(SendAuth.Resp resp);
+    /**
+     *
+     * @param activity WxCallBackDelegate中包含的activity，通常指包名wxapi目录下定义的微信所需的activity
+     * @param resp
+     */
+    void onWxLoginSuccess(Activity activity, SendAuth.Resp resp);
 
 }

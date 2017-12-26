@@ -1,9 +1,13 @@
 package easy.share.wx;
 
 import android.content.Context;
+import android.webkit.WebView;
 
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelpay.PayReq;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import easy.share.wx.iml.WxPayResponseListener;
 
@@ -104,7 +108,40 @@ public class WxPay {
         return senPayReq(context, appId, payReq);
     }
 
+    /**
+     * 发送支付请求
+     *
+     * @param context
+     * @param appId
+     * @param req
+     * @return
+     * @throws WxNotInstalledException
+     * @throws WxNotSupportVersionException
+     */
     public static boolean senPayReq(Context context, String appId, BaseReq req) throws WxNotInstalledException, WxNotSupportVersionException {
         return WeiXin.senReq(context, appId, req);
+    }
+
+    /**
+     * 拦截h5地址支付
+     *
+     * @param url     目标链接
+     * @param referer 商户申请H5时提交的授权域名
+     * @param webView
+     */
+    public static void h5PayUrlIntercept(String url, String referer, WebView webView) {
+        Map<String, String> extraHeaders = new HashMap<String, String>();
+        extraHeaders.put("Referer", "https://paytest.ucuxin.com");// "http://wxpay.wxutil.com");
+        webView.loadUrl(url, extraHeaders);
+    }
+
+    /**
+     * 是否是h5支付协议
+     *
+     * @param url
+     * @return
+     */
+    public static boolean isH5PaySchema(String url) {
+        return url.toLowerCase().startsWith("weixin://wap/pay?");
     }
 }
