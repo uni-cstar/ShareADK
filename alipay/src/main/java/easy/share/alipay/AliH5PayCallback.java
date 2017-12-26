@@ -8,7 +8,7 @@ public interface AliH5PayCallback {
     /**
      * 不是支付宝 h5支付地址
      *
-     * @param url
+     * @param url 原url地址
      */
     void onNotAliH5PayResult(String url);
 

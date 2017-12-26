@@ -12,7 +12,7 @@ public class AliPayResult extends Result{
     /**
      * 处理V2的结果
      *
-     * @param rawResult
+     * @param rawResult 原始支付宝支付结果
      */
     public AliPayResult(Map<String, String> rawResult) {
         if (rawResult == null) {
@@ -33,7 +33,7 @@ public class AliPayResult extends Result{
     /**
      * 处理V1的结果
      *
-     * @param rawResult
+     * @param rawResult 原始支付宝支付返回结果
      */
     public AliPayResult(String rawResult) {
         if (TextUtils.isEmpty(rawResult))
