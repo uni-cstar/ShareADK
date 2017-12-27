@@ -1,7 +1,24 @@
 
-## 使用步骤
-    # 配置
-        在你的包名相应目录下新建一个wxapi目录，并在该wxapi目录下创建一个Activity，名为WXEntryActivity,
+## 使用步骤（latest_version = 1.2）
+    # 工程配置
+        1、在工程的build.gradle文件中配置以下语句
+        ```
+            allprojects {
+                repositories {
+                    jcenter()
+                    maven {
+                        url 'https://dl.bintray.com/supluo/maven'
+                    }
+                }
+
+            }
+        ```
+        2.在（app）module的build.gradle文件中配置依赖
+        ```
+            compile('easy.share:weixin:{latest_version}')
+        ```
+
+        3.在你的包名相应目录下新建一个wxapi目录，并在该wxapi目录下创建一个Activity，名为WXEntryActivity,
         并且在AndroidManifest.xml中为WXEntryActivity的申明增加`android:exported="true"`属性
         ```
         //在AndroidManifest.xml中最终定义
@@ -9,48 +26,59 @@
                   android:exported="true"/>
 
         ```
-        在WxEntryActivity的OnCreate方法中调用`WeiXin.createWxEntry(Activity activity, String appId)`得到一个IWxEntry的实例，
-        并调用IWxEntry的onActivityCreate方法。
-        重写WxEntryActivity的onNewIntent(Intent intent)方法，
-        在里面调用IWxEntry的onNewIntent(Intent intent)方法
+        #在WxEntryActivity的OnCreate方法中调用`WeiXin.createWxEntry(Activity activity, String appId)`得到一个IWxEntry的实例，
+        #并调用IWxEntry的onActivityCreate方法。
+        #重写WxEntryActivity的onNewIntent(Intent intent)方法，
+        #在里面调用IWxEntry的onNewIntent(Intent intent)方法
+        常规使用微信的登录分享等功能，只需让WxEntryActivity 继承BaseWxEntryActivity即可
         完成以上步骤，微信就配置完成了
 
         // WxEntryActivity的基本内容如下
-         public class WXEntryActivity extends AppCompatActivity {
+        ```
+           public class WXEntryActivity extends BaseWxEntryActivity {
 
-                IWxEntry wxEntry;
+               @Override
+               protected void onCreate(@Nullable Bundle savedInstanceState) {
+                   super.onCreate(savedInstanceState);
+               }
 
-                @Override
-                protected void onCreate(Bundle savedInstanceState) {
-                    super.onCreate(savedInstanceState);
-                    wxEntry = WeiXin.createWxEntry(this, "你的微信AppId");
-                    wxEntry.onActivityCreate();
-                }
-
-                @Override
-                protected void onNewIntent(Intent intent) {
-                    super.onNewIntent(intent);
-                    wxEntry.onNewIntent(intent);
-                }
-            }
+               @Override
+               protected String getWxAppID() {
+                   return "{your weixin appid}";
+               }
+           }
+        ```
 
 
     # 混淆
         ```
         -keep class com.tencent.mm.opensdk.** {
-           *;
-        }
-        -keep class com.tencent.wxop.** {
-           *;
-        }
-        -keep class com.tencent.mm.sdk.** {
-           *;
-        }
+            *;
+         }
 
-        -keep public class easy.share.wx.**{
+         -keep class com.tencent.wxop.** {
+            *;
+         }
+
+         -keep class com.tencent.mm.sdk.** {
+            *;
+         }
+
+         -keepclassmembernames class easy.share.wx.iml.**{
+             public *;
+             protected *;
+         }
+
+         -keepclassmembernames class easy.share.wx.model.**{
+             public *;
+             protected *;
+         }
+
+         -keep public class easy.share.wx.**{
             public *;
             protected *;
-        }
+         }
+
         ```
 
     # 分享
@@ -74,7 +102,8 @@
         2.调用`WxAuth.login(Context context, String appId, String scope, String state)`方法发起登录，如果是为了获取用户信息，scope参数可以使用WxAuth.ScopeForUserInfo作为参数
         3.根据需要，调用`WxAuth.removeAuthListener(WxLoginResponseListener listener)`移除监听
         以上步骤为登录获取用户accesstoken过程，获取token之后获取用户信息等可以使用WxAut提供的getXXXXUrl进行访问
-
+    # h5支付
+        见WxPay定义的h5PayUrlIntercept等方法，在webview的内置浏览器client中调用即可
 
 
     # 相关的
