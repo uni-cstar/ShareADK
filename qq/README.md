@@ -29,6 +29,7 @@
                   <category android:name="android.intent.category.DEFAULT" />
                   <category android:name="android.intent.category.BROWSABLE" />
                   //222222为您申请的appid
+                  //注意tencent是必须的
                   <data android:scheme="tencent222222" />
               </intent-filter>
           </activity>
@@ -62,7 +63,8 @@
     # 使用
         所有相关的方法在QQ文件中已定义
         在需要使用分享／登录的Activity或Fragment中，调用`QQ.buildQQAction(Activity activity, String appId)`或调用`QQ.buildQQAction(Fragment fragment, String appId)`
-        方法得到一个QQAction的实例，在Activity/Fragment的onActivityResult(int requestCode, int resultCode, Intent data)方法中调用QQAction的onActivityResult(int requestCode, int resultCode, Intent data)方法
+        方法得到一个QQAction的实例，在Activity/Fragment的onActivityResult(int requestCode, int resultCode, Intent data)方法中
+        调用QQAction的onActivityResult(int requestCode, int resultCode, Intent data)方法（这方法很重要，必须调用，否则无法回调）
 
     # 分享
         分享到QQ空间:`QQAction.shareToQZone(Activity activity, Bundle params, QQShareListener listener);`,目前只支持图文分享
