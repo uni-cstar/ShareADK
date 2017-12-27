@@ -30,7 +30,17 @@
    *;
 }
 
--keep class easy.share.wx.**{
+-keepclassmembernames class easy.share.wx.iml.**{
     public *;
     protected *;
+}
+
+-keepclassmembernames class easy.share.wx.model.**{
+    public *;
+    protected *;
+}
+
+-keep public class easy.share.wx.**{
+   public *;
+   protected *;
 }

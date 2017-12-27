@@ -1,6 +1,12 @@
 
 ## 使用步骤
     # 配置
+        所需权限
+        ```
+        <uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        ```
+
         在应用的AndroidManifest.xml增加配置的<application>节点下增加以下配置（注：不配置将会导致无法调用API）
         ```
           <activity
@@ -21,17 +27,27 @@
 
     # 混淆
         ```
-        -keep class com.tencent.open.TDialog$*
-        -keep class com.tencent.open.TDialog$* {*;}
-        -keep class com.tencent.open.PKDialog
-        -keep class com.tencent.open.PKDialog {*;}
-        -keep class com.tencent.open.PKDialog$*
-        -keep class com.tencent.open.PKDialog$* {*;}
+          #忽略提醒
+          -dontwarn com.tencent.connect.**
+          -dontwarn com.tencent.open.**
+          -dontwarn com.tencent.tauth.**
 
-        -keep public class easy.share.qq.**{
-           public *;
-           protected *;
-        }
+          #保留qq的jar包不混淆
+          -keep class com.tencent.connect.**{
+              *;
+          }
+          -keep class com.tencent.open.**{
+              *;
+          }
+          -keep class com.tencent.tauth.**{
+              *;
+          }
+
+          #壳子中的混淆规则
+          -keepclassmembernames class easy.share.qq.**{
+              public *;
+              protected *;
+          }
         ```
     # 使用
         所有相关的方法在QQ文件中已定义

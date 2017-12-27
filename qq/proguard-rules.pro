@@ -16,15 +16,38 @@
 #   public *;
 #}
 
+-ignorewarnings
+-optimizationpasses 5
+-verbose
+-dontskipnonpubliclibraryclasses
 
--keep class com.tencent.open.TDialog$*
--keep class com.tencent.open.TDialog$* {*;}
--keep class com.tencent.open.PKDialog
--keep class com.tencent.open.PKDialog {*;}
--keep class com.tencent.open.PKDialog$*
--keep class com.tencent.open.PKDialog$* {*;}
+#不混淆QQ的jar包
+#-libraryjars libs/open_sdk_r5923_lite_3.3.0.jar
+
+#忽略提醒
+-dontwarn com.tencent.connect.**
+-dontwarn com.tencent.open.**
+-dontwarn com.tencent.tauth.**
+
+#保留qq的jar包不混淆
+-keep class com.tencent.connect.**{
+    *;
+}
+-keep class com.tencent.open.**{
+    *;
+}
+-keep class com.tencent.tauth.**{
+    *;
+}
+
+#壳子中的混淆规则
+-keepclassmembernames class easy.share.qq.**{
+    public *;
+    protected *;
+}
 
 -keep public class easy.share.qq.**{
    public *;
    protected *;
 }
+

@@ -77,8 +77,6 @@ class QQActionImpl implements QQAction {
             Tencent.onActivityResultData(requestCode, resultCode, data, mLoginCallBackListener);
         } else if (requestCode == Constants.REQUEST_QQ_SHARE || requestCode == Constants.REQUEST_QZONE_SHARE) {
             Tencent.onActivityResultData(requestCode, resultCode, data, mShareCallBackListener);
-        } else {
-//            Tencent.onActivityResultData(requestCode, resultCode, data, this);
         }
     }
 
@@ -239,6 +237,7 @@ class QQActionImpl implements QQAction {
      * @param listener
      */
     public void shareToQZone(Activity activity, Bundle params, QQShareListener listener) {
+
         mTencent.shareToQzone(activity, params, mShareCallBackListener);
         mShareListener = listener;
     }
@@ -264,7 +263,6 @@ class QQActionImpl implements QQAction {
             try {
                 if (mShareListener != null) {
                     mShareListener.onQQShareSuccess();
-                    mShareListener = null;
                 }
             } finally {
                 mShareListener = null;
@@ -276,7 +274,6 @@ class QQActionImpl implements QQAction {
             try {
                 if (mShareListener != null) {
                     mShareListener.onQQApiFailed(QQApiResult.fromUiError(uiError));
-                    mShareListener = null;
                 }
             } finally {
                 mShareListener = null;
@@ -288,7 +285,6 @@ class QQActionImpl implements QQAction {
             try {
                 if (mShareListener != null) {
                     mShareListener.onQQApiCancel();
-
                 }
             } finally {
                 mShareListener = null;
