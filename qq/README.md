@@ -1,13 +1,24 @@
 
-## 使用步骤
-    # 配置
-        所需权限
+## 使用步骤（latest_version = 1.1）
+    # 工程配置
+        1、在工程的build.gradle文件中配置以下语句
         ```
-        <uses-permission android:name="android.permission.INTERNET" />
-        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            allprojects {
+                repositories {
+                    jcenter()
+                    maven {
+                        url 'https://dl.bintray.com/supluo/maven'
+                    }
+                }
+
+            }
+        ```
+        2.在（app）module的build.gradle文件中配置依赖
+        ```
+            compile('easy.share:qq:{latest_version}')
         ```
 
-        在应用的AndroidManifest.xml增加配置的<application>节点下增加以下配置（注：不配置将会导致无法调用API）
+        3.在应用的AndroidManifest.xml增加配置的<application>节点下增加以下配置（注：不配置将会导致无法调用API）
         ```
           <activity
               android:name="com.tencent.tauth.AuthActivity"
@@ -23,7 +34,6 @@
           </activity>
 
         ```
-
 
     # 混淆
         ```
