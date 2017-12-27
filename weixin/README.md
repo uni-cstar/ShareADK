@@ -26,13 +26,9 @@
                   android:exported="true"/>
 
         ```
-        #在WxEntryActivity的OnCreate方法中调用`WeiXin.createWxEntry(Activity activity, String appId)`得到一个IWxEntry的实例，
-        #并调用IWxEntry的onActivityCreate方法。
-        #重写WxEntryActivity的onNewIntent(Intent intent)方法，
-        #在里面调用IWxEntry的onNewIntent(Intent intent)方法
-        常规使用微信的登录分享等功能，只需让WxEntryActivity 继承BaseWxEntryActivity即可
-        完成以上步骤，微信就配置完成了
-
+        常规使用微信的登录分享等功能，只需让WxEntryActivity 继承BaseWxEntryActivity即可或者
+        仿造完成自己所需的特定逻辑。
+      
         // WxEntryActivity的基本内容如下
         ```
            public class WXEntryActivity extends BaseWxEntryActivity {
@@ -48,6 +44,8 @@
                }
            }
         ```
+        
+        完成以上步骤，微信就配置完成了
 
 
     # 混淆
