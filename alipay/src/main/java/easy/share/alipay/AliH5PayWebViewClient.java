@@ -46,7 +46,7 @@ public class AliH5PayWebViewClient extends WebViewClient {
     }
 
     public boolean shouldOverrideUrlLoadingAfterAliPayCheck(WebView view, String url) {
-        if (!(url.startsWith("http") || url.startsWith("https"))) {
+        if (url.startsWith("http") || url.startsWith("ftp") ) {
             view.loadUrl(url);
         }
         return true;
