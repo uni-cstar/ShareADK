@@ -2,26 +2,16 @@
 ## 使用步骤
     # 配置
         在项目根目录的build.gradle中设置中央仓库
-        maven { url "https://dl.bintray.com/thelasterstar/maven/" }
+        maven { url "https://dl.bintray.com/supluo/maven" }
         在需要引入SDK的module目录的build.gradle中引入sdk-core依赖
         如下：
         ```
-        buildscript {
-
-            repositories {
-                jcenter()
-                //添加以下两句
-                mavenCentral();
-                maven { url "https://dl.bintray.com/thelasterstar/maven/" }
-            }
-            ...
-        }
         allprojects {
                     repositories {
                         jcenter()
                         //添加以下两句
                         mavenCentral();
-                        maven { url "https://dl.bintray.com/thelasterstar/maven/" }
+                        maven { url "https://dl.bintray.com/supluo/maven" }
                     }
         }
 
