@@ -7,13 +7,12 @@
                 allprojects {
                     repositories {
                         jcenter()
-                        maven {
-                            url 'https://dl.bintray.com/supluo/maven'
-                        }
+                        mavenCentral();
+                        maven { url "https://dl.bintray.com/thelasterstar/maven/" }
+                        maven { url 'https://dl.bintray.com/supluo/maven'}
                     }
-
                 }
-                ```
+            ```
         2.在（app）module的build.gradle文件中配置依赖
         ```
             compile('easy.share:sina:{latest_version}')
