@@ -1,11 +1,12 @@
-package easy.share.wx;
+package halo.android.share.wx;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import easy.share.wx.iml.IWxEntry;
+import halo.android.share.wx.iml.IWxEntry;
+
 
 /**
  * Created by Lucio on 17/12/26.

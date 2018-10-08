@@ -1,4 +1,4 @@
-package easy.share.wx;
+package halo.android.share.wx;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -20,7 +20,7 @@ import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import easy.share.wx.iml.WxShareResponseListener;
+import halo.android.share.wx.iml.WxShareResponseListener;
 
 /**
  * Created by Lucio on 17/5/10.
@@ -261,7 +261,7 @@ public class WxShare {
      * @param shareTo
      * @return
      */
-    public static SendMessageToWX.Req buildVideoShareReq(String videoUrl, String title, String desc, @Nullable byte[] thumbData, @ShareTo int shareTo) {
+    public static SendMessageToWX.Req buildVideoShareReq(String videoUrl, String title, String desc,@Nullable byte[] thumbData, @ShareTo int shareTo) {
         WXVideoObject video = new WXVideoObject();
         video.videoUrl = videoUrl;
 
@@ -323,7 +323,7 @@ public class WxShare {
         return buildReq("webpage", SendToSession, msg);
     }
 
-    public static boolean senReq(Context context, String appId, BaseReq req) throws WxNotInstalledException, WxNotSupportVersionException {
+    public static boolean senReq(Context context, String appId, BaseReq req) throws WxNotInstalledException {
         return WeiXin.senReq(context, appId, req);
     }
 }

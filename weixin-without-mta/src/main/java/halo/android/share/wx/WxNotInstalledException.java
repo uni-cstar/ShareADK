@@ -1,4 +1,4 @@
-package easy.share.wx;
+package halo.android.share.wx;
 
 /**
  * Created by Lucio on 17/5/11.

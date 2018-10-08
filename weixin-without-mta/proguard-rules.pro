@@ -30,17 +30,17 @@
    *;
 }
 
--keepclassmembernames class easy.share.wx.iml.**{
+-keepclassmembernames class halo.android.share.wx.iml.**{
     public *;
     protected *;
 }
 
--keepclassmembernames class easy.share.wx.model.**{
+-keepclassmembernames class halo.android.share.wx.model.**{
     public *;
     protected *;
 }
 
--keep public class easy.share.wx.**{
+-keep public class halo.android.share.wx.**{
    public *;
    protected *;
 }

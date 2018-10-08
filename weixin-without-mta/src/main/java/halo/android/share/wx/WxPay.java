@@ -1,4 +1,4 @@
-package easy.share.wx;
+package halo.android.share.wx;
 
 import android.content.Context;
 import android.webkit.WebView;
@@ -9,7 +9,7 @@ import com.tencent.mm.opensdk.modelpay.PayReq;
 import java.util.HashMap;
 import java.util.Map;
 
-import easy.share.wx.iml.WxPayResponseListener;
+import halo.android.share.wx.iml.WxPayResponseListener;
 
 /**
  * Created by Lucio on 17/5/11.
@@ -97,9 +97,8 @@ public class WxPay {
      * @param timeStamp    时间戳，标准北京时间，时区为东八区，自1970年1月1日 0点0分0秒以来的秒数。注意：部分系统取到的值为毫秒级，需要转换成秒(10位数字)。
      * @param sign         签名
      * @throws WxNotInstalledException      微信未安装
-     * @throws WxNotSupportVersionException 微信版本不支持
      */
-    public static boolean senPayReq(Context context, String appId, String partnerId, String prepayId, String packageValue, String nonceStr, String timeStamp, String sign) throws WxNotInstalledException, WxNotSupportVersionException {
+    public static boolean senPayReq(Context context, String appId, String partnerId, String prepayId, String packageValue, String nonceStr, String timeStamp, String sign) throws WxNotInstalledException {
         PayReq payReq = buildPayReq(appId, partnerId, prepayId, packageValue, nonceStr, timeStamp, sign);
         return senPayReq(context, appId, payReq);
     }
@@ -116,9 +115,8 @@ public class WxPay {
      * @param sign          签名
      * @param callBackClass 回调activity名字，可以为空，则WxEntryActivity触发回调，也可以制定自定义activity名字
      * @throws WxNotInstalledException      微信未安装
-     * @throws WxNotSupportVersionException 微信版本不支持
      */
-    public static boolean senPayReq(Context context, String appId, String partnerId, String prepayId, String packageValue, String nonceStr, String timeStamp, String sign, Class callBackClass) throws WxNotInstalledException, WxNotSupportVersionException {
+    public static boolean senPayReq(Context context, String appId, String partnerId, String prepayId, String packageValue, String nonceStr, String timeStamp, String sign, Class callBackClass) throws WxNotInstalledException {
         PayReq payReq = buildPayReq(appId, partnerId, prepayId, packageValue, nonceStr, timeStamp, sign, callBackClass);
         return senPayReq(context, appId, payReq);
     }
@@ -131,9 +129,8 @@ public class WxPay {
      * @param req
      * @return
      * @throws WxNotInstalledException
-     * @throws WxNotSupportVersionException
      */
-    public static boolean senPayReq(Context context, String appId, BaseReq req) throws WxNotInstalledException, WxNotSupportVersionException {
+    public static boolean senPayReq(Context context, String appId, BaseReq req) throws WxNotInstalledException {
         return WeiXin.senReq(context, appId, req);
     }
 

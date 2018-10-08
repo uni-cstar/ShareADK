@@ -1,4 +1,4 @@
-package easy.share.wx;
+package halo.android.share.wx;
 
 import android.os.Bundle;
 import android.text.TextUtils;

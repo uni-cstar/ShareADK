@@ -107,3 +107,16 @@
     # 相关的
     code
     －6     签名错误
+
+
+## DEBUG环境
+如果需要运行SDK Sample工程，需要通过指定的debug.keystore来进行签名：
+
+Android Studio环境下：
+```
+signingConfigs {
+    debug {
+        storeFile file("../debug.keystore")
+    }
+}
+```

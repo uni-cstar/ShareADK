@@ -1,4 +1,4 @@
-package easy.share.wx.iml;
+package halo.android.share.wx.iml;
 
 import android.app.Activity;
 
