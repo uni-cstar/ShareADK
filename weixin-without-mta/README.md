@@ -15,7 +15,9 @@
         ```
         2.在（app）module的build.gradle文件中配置依赖
         ```
-            compile('easy.share:weixin:{latest_version}')
+            compile('halo.android.share:weixin-without-mta:1.0')
+            //依赖了support-annotations，版本号根据自己项目所使用support系列版本确定
+            compile "com.android.support:support-annotations:${versions.supportLibrary}"
         ```
 
         3.在你的包名相应目录下新建一个wxapi目录，并在该wxapi目录下创建一个Activity，名为WXEntryActivity,
