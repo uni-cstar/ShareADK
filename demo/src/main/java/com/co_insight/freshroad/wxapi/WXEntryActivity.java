@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import easy.share.wx.WeiXin;
-import easy.share.wx.iml.IWxEntry;
+import halo.android.share.wx.WeiXin;
+import halo.android.share.wx.iml.IWxEntry;
 
 public class WXEntryActivity extends AppCompatActivity {
 

@@ -7,10 +7,7 @@ import android.widget.Toast;
 
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 
-import easy.share.wx.WxNotInstalledException;
-import easy.share.wx.WxNotSupportVersionException;
-import easy.share.wx.WxShare;
-import easy.share.wx.iml.WxShareResponseListener;
+import halo.android.share.wx.WxShare;
 
 public class MainActivity extends AppCompatActivity {
 

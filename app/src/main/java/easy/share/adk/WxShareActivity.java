@@ -1,7 +1,6 @@
 package easy.share.adk;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,10 +16,8 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
-import easy.share.wx.WxAuth;
-import easy.share.wx.WxNotInstalledException;
-import easy.share.wx.WxNotSupportVersionException;
-import easy.share.wx.WxPay;
+import halo.android.share.wx.WxNotInstalledException;
+import halo.android.share.wx.WxPay;
 
 public class WxShareActivity extends AppCompatActivity implements IWXAPIEventHandler {
 
@@ -69,8 +66,6 @@ public class WxShareActivity extends AppCompatActivity implements IWXAPIEventHan
             WxPay.senPayReq(this,"wx52d54b3771fb5594",payReq);
 //            ShareCompat.sendPayReq(this, payReq, WxShareActivity.class.getName());
         }catch (WxNotInstalledException e) {
-            e.printStackTrace();
-        } catch (WxNotSupportVersionException e) {
             e.printStackTrace();
         }
     }
