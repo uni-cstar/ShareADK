@@ -1,4 +1,4 @@
-package easy.share.alipay;
+package halo.android.integration.alipay;
 
 /**
  * Created by Lucio on 17/12/21.

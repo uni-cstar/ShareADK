@@ -1,4 +1,4 @@
-package easy.share.alipay;
+package halo.android.integration.alipay;
 
 import com.alipay.sdk.util.H5PayResultModel;
 

@@ -1,4 +1,4 @@
-package easy.share.alipay;
+package halo.android.integration.alipay;
 
 import android.app.Activity;
 import android.text.TextUtils;

@@ -1,10 +1,14 @@
-package easy.share.alipay;
+package halo.android.integration.alipay;
 
 import android.text.TextUtils;
 
 import java.util.Map;
 
 public class AliPayResult extends Result{
+
+    private static final String KEY_RESULT_STATUS = "resultStatus";
+    private static final String KEY_RESULT = "result";
+    private static final String KEY_MEMO = "memo";
 
     private String memo;
     private String result;
@@ -18,13 +22,12 @@ public class AliPayResult extends Result{
         if (rawResult == null) {
             return;
         }
-
         for (String key : rawResult.keySet()) {
-            if (TextUtils.equals(key, "resultStatus")) {
+            if (TextUtils.equals(key, KEY_RESULT_STATUS)) {
                 resultStatus = rawResult.get(key);
-            } else if (TextUtils.equals(key, "result")) {
+            } else if (TextUtils.equals(key, KEY_RESULT)) {
                 result = rawResult.get(key);
-            } else if (TextUtils.equals(key, "memo")) {
+            } else if (TextUtils.equals(key, KEY_MEMO)) {
                 memo = rawResult.get(key);
             }
         }
@@ -38,23 +41,22 @@ public class AliPayResult extends Result{
     public AliPayResult(String rawResult) {
         if (TextUtils.isEmpty(rawResult))
             return;
-
         String[] resultParams = rawResult.split(";");
         for (String resultParam : resultParams) {
-            if (resultParam.startsWith("resultStatus")) {
-                resultStatus = gatValue(resultParam, "resultStatus");
+            if (resultParam.startsWith(KEY_RESULT_STATUS)) {
+                resultStatus = getV1Value(resultParam, KEY_RESULT_STATUS);
             }
-            if (resultParam.startsWith("result")) {
-                result = gatValue(resultParam, "result");
+            if (resultParam.startsWith(KEY_RESULT)) {
+                result = getV1Value(resultParam, KEY_RESULT);
             }
-            if (resultParam.startsWith("memo")) {
-                memo = gatValue(resultParam, "memo");
+            if (resultParam.startsWith(KEY_MEMO)) {
+                memo = getV1Value(resultParam, KEY_MEMO);
             }
         }
-
     }
 
-    private String gatValue(String content, String key) {
+    //获取v1结果中的值
+    private String getV1Value(String content, String key) {
         String prefix = key + "={";
         return content.substring(content.indexOf(prefix) + prefix.length(),
                 content.lastIndexOf("}"));
@@ -70,8 +72,7 @@ public class AliPayResult extends Result{
 
     @Override
     public String toString() {
-        return "resultStatus={" + resultStatus + "};memo={" + memo
-                + "};result={" + result + "}";
+        return String.format("%s={%s};\n%s={%s}\n%s={%s}",KEY_RESULT_STATUS,resultStatus,KEY_RESULT,result,KEY_MEMO,memo);
     }
 
     /**

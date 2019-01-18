@@ -1,4 +1,6 @@
-package easy.share.alipay;
+package halo.android.integration.alipay;
+
+import android.text.TextUtils;
 
 /**
  * Created by Lucio on 17/12/21.
@@ -22,5 +24,9 @@ class Result {
      */
     public String getResultStatus() {
         return resultStatus;
+    }
+
+    public boolean isSuccess(){
+        return TextUtils.equals(resultStatus, "9000");
     }
 }
