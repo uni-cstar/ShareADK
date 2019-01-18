@@ -9,18 +9,26 @@ android {
     }
     buildTypes {
         debug {
+            //开启混淆
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //传递混淆规则
+            consumerProguardFiles 'proguard-rules.pro'
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            consumerProguardFiles 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
-    compile files('libs/alipaySdk-20170922.jar')
+    //    compile(name: 'alipaySdk-15.5.9-20181123210601', ext: 'aar')
+    provided 'com.android.support:support-annotations:25.3.1'
+    provided 'com.android.support:support-compat:25.3.1'
+    compile files('libs/alipaySdk-20180601.jar')
 }
 
-//apply from: './bintray.gradle'
+apply from: './bintray.gradle'

@@ -1,10 +1,10 @@
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-def proj_version = '1.1'
+def proj_version = '1.3'
 def proj_artifact_id = 'alipay'
-def proj_group='easy.share'
-def proj_pom_name = 'Easy for Android'
+def proj_group='halo.android.integration'
+def proj_pom_name = 'Alipay Integartion for Android'
 
 def siteUrl = 'https://github.com/SupLuo/Easy/tree/master/easy'      // 项目的主页
 def gitUrl = 'https://github.com/SupLuo/Easy.git'   // Git仓库的url

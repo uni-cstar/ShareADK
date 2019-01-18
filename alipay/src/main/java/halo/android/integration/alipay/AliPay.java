@@ -2,7 +2,10 @@ package halo.android.integration.alipay;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.annotation.WorkerThread;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -17,6 +20,36 @@ import com.alipay.sdk.util.H5PayResultModel;
  */
 public final class AliPay {
 
+    //23版本以下的没有[Build.VERSION_CODES.M]变量
+    public static final int M = 23;
+
+    /**
+     * 支付所需的权限
+     */
+    public static final String[] PAY_DEMAND_PERMISSIONS = new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
+    /**
+     * 是否需要检测权限可用性
+     * 如果targetVersion 和 buildVersion 都是23及以上 则需要检验
+     *
+     * @return
+     */
+    public static boolean shouldCheckPermissionValidation(Context ctx) {
+        return isPermissionTargetVersion(ctx) && Build.VERSION.SDK_INT >= M;
+    }
+
+    /**
+     * 是否需要进行权限处理（目标版本是否是23及以上）
+     */
+    private static boolean isPermissionTargetVersion(Context ctx) {
+        try {
+            PackageInfo packInfo = ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0);
+            return packInfo.applicationInfo.targetSdkVersion >= M;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
     /**
      * 获取支付宝 SDK 版本号。
      */
@@ -29,7 +62,7 @@ public final class AliPay {
      * 请求支付宝所需权限支付所需权限
      */
     public static void requestPermissions(Activity activity, int requestCode) {
-        ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
+        ActivityCompat.requestPermissions(activity, PAY_DEMAND_PERMISSIONS, requestCode);
     }
 
     /**
@@ -95,10 +128,12 @@ public final class AliPay {
      */
     @WorkerThread
     public static AliPayResult payV2(Activity activity, String orderInfo, boolean showLoading) {
-        if (AliPaySupport.isPermissionTargetVersion(activity)) {
+        if (shouldCheckPermissionValidation(activity)) {
             //需要进行权限校验
-            if (ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                throw new SecurityException(Manifest.permission.WRITE_EXTERNAL_STORAGE + " or " + Manifest.permission.READ_PHONE_STATE +"is deny.");
+            for (String permission : PAY_DEMAND_PERMISSIONS) {
+                if (ContextCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
+                    throw new SecurityException(permission + " is deny.");
+                }
             }
         }
         PayTask payTask = new PayTask(activity);
