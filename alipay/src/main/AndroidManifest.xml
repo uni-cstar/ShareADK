@@ -8,9 +8,21 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
+    <!--来源于alipay aar 清单文件-->
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
+
     <application>
 
         <!-- alipay sdk start -->
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
         <!--说明：
             1&2为H5转native支付所需要的配置
@@ -44,7 +56,6 @@
         </activity>
 
         <!-- alipay sdk end -->
-
 
     </application>
 

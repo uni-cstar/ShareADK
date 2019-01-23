@@ -5,8 +5,6 @@ import android.text.TextUtils;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.alipay.sdk.app.PayTask;
-
 /**
  * Created by Lucio on 17/5/4.
  * 支付宝支付，实现H5转Native支付
@@ -14,13 +12,10 @@ import com.alipay.sdk.app.PayTask;
 
 public class AliH5PayWebViewClient extends WebViewClient {
 
-    Activity mActivity;
-
-    PayTask mPayCheckTask;
+    private Activity mActivity;
 
     public AliH5PayWebViewClient(Activity activity) {
         mActivity = activity;
-        mPayCheckTask = new PayTask(activity);
     }
 
     @Override

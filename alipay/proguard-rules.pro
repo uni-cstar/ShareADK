@@ -16,11 +16,17 @@
 #   public *;
 #}
 
-# integration-alipay 混淆规则：保留所有public文件
+# integration-alipay 混淆规则 [START]
+# 保留所有public文件
 -keep public class halo.android.integration.alipay.**{
    public *;
    protected *;
 }
+# 避免打包失败
+-dontwarn android.net.**
+-keep class android.net.SSLCertificateSocketFactory{*;}
+# integration-alipay 混淆规则 [END]
+
 
 # alipay 混淆规则 [START]
 -keep class com.alipay.android.app.IAlixPay{*;}
