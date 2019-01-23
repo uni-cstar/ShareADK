@@ -1,5 +1,5 @@
 
-## 使用步骤（latest_version = 1.2）
+## 使用步骤
     # 工程配置
         1、在工程的build.gradle文件中配置以下语句
         ```
@@ -15,18 +15,24 @@
         ```
         2.在（app）module的build.gradle文件中配置依赖
         ```
-            compile('halo.android.share:weixin-without-mta:1.0')
+            compile('halo.android.share:weixin-without-mta:1.4')
             //依赖了support-annotations，版本号根据自己项目所使用support系列版本确定
             compile "com.android.support:support-annotations:${versions.supportLibrary}"
         ```
 
         3.在你的包名相应目录下新建一个wxapi目录，并在该wxapi目录下创建一个Activity，名为WXEntryActivity,
         并且在AndroidManifest.xml中为WXEntryActivity的申明增加`android:exported="true"`属性
+
         ```
         //在AndroidManifest.xml中最终定义
-        <activity android:name=".wxapi.WXEntryActivity"
-                  android:exported="true"/>
-
+           <activity
+               android:name=".wxapi.WXEntryActivity"
+               android:label="@string/app_name"
+               android:theme="@android:style/Theme.Translucent.NoTitleBar"
+               android:exported="true"
+               android:taskAffinity="net.sourceforge.simcpux"
+               android:launchMode="singleTask">
+           </activity>
         ```
         常规使用微信的登录分享等功能，只需让WxEntryActivity 继承BaseWxEntryActivity即可或者
         仿造完成自己所需的特定逻辑。
@@ -51,35 +57,7 @@
 
 
     # 混淆
-        ```
-        -keep class com.tencent.mm.opensdk.** {
-            *;
-         }
-
-         -keep class com.tencent.wxop.** {
-            *;
-         }
-
-         -keep class com.tencent.mm.sdk.** {
-            *;
-         }
-
-         -keepclassmembernames class easy.share.wx.iml.**{
-             public *;
-             protected *;
-         }
-
-         -keepclassmembernames class easy.share.wx.model.**{
-             public *;
-             protected *;
-         }
-
-         -keep public class easy.share.wx.**{
-            public *;
-            protected *;
-         }
-
-        ```
+       已经添加了混淆，会传递混淆规则，因此不用在app中配置相关混淆
 
     # 分享
     ** 注意：微信对缩略图大小有限制，因此缩略图过大，会导致分享不成功
