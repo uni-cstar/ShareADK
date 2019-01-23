@@ -15,60 +15,6 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
--dontshrink
--dontpreverify
--dontoptimize
--dontusemixedcaseclassnames
-
--flattenpackagehierarchy
--allowaccessmodification
--printmapping map.txt
-
--optimizationpasses 7
--verbose
--keepattributes Exceptions,InnerClasses
--dontskipnonpubliclibraryclasses
--dontskipnonpubliclibraryclassmembers
--ignorewarnings
-
--keep public class * extends android.app.Activity
--keep public class * extends android.app.Application
--keep public class * extends android.app.Service
--keep public class * extends android.content.BroadcastReceiver
--keep public class * extends android.content.ContentProvider
--keep public class * extends java.lang.Throwable {*;}
--keep public class * extends java.lang.Exception {*;}
-
--keepclasseswithmembernames class * {
-    native <methods>;
-}
-
--keepclasseswithmembers class * {
-    public <init>(android.content.Context, android.util.AttributeSet);
-}
-
--keepclasseswithmembers class * {
-    public <init>(android.content.Context, android.util.AttributeSet, int);
-}
-
--keepclassmembers class * extends android.app.Activity {
-   public void *(android.view.View);
-}
-
--keepclassmembers enum * {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
-}
-
--keep class * implements android.os.Parcelable {
-  public static final android.os.Parcelable$Creator *;
-}
-
-# adding this in to preserve line numbers so that the stack traces
-# can be remapped
--renamesourcefileattribute SourceFile
--keepattributes SourceFile,LineNumberTable
-
 
 # integration-alipay 混淆规则：保留所有public文件
 -keep public class halo.android.integration.alipay.**{
@@ -76,19 +22,13 @@
    protected *;
 }
 
-# alipay sdk 混淆规则
-#-libraryjars libs/alipaySdk-15.5.7-20180601.jar
-# 混淆说明：部分A为app支付文档上的混淆规则  部分A+部分B是H5转Native支付文档上的混淆规则
-
-# 混淆部分A
+# alipay 混淆规则 [START]
 -keep class com.alipay.android.app.IAlixPay{*;}
 -keep class com.alipay.android.app.IAlixPay$Stub{*;}
 -keep class com.alipay.android.app.IRemoteServiceCallback{*;}
 -keep class com.alipay.android.app.IRemoteServiceCallback$Stub{*;}
 -keep class com.alipay.sdk.app.PayTask{ public *;}
 -keep class com.alipay.sdk.app.AuthTask{ public *;}
-
-# 混淆部分B
 -keep class com.alipay.sdk.app.H5PayCallback {
     <fields>;
     <methods>;
@@ -102,3 +42,14 @@
 -keep class com.alipay.tscenter.** { *; }
 -keep class com.ta.utdid2.** { *;}
 -keep class com.ut.device.** { *;}
+
+# SDK 包可能不包含 utdid
+-dontwarn com.ta.utdid2.**
+-dontwarn com.ut.device.**
+
+# SDK 包可能不包含 securitysdk
+-dontwarn com.alipay.mobilesecuritysdk.**
+
+# alipay 混淆规则 [END]
+
+
