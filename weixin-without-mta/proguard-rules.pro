@@ -16,31 +16,29 @@
 #   public *;
 #}
 
-
-# 微信SDK 混淆设置
--keep class com.tencent.mm.opensdk.** {
-   *;
-}
-
--keep class com.tencent.wxop.** {
-   *;
-}
-
--keep class com.tencent.mm.sdk.** {
-   *;
-}
-
--keepclassmembernames class halo.android.share.wx.iml.**{
+# [START] integration-wx 混淆规则
+-keepclassmembernames class halo.android.integration.wx.**{
     public *;
     protected *;
 }
 
--keepclassmembernames class halo.android.share.wx.model.**{
-    public *;
-    protected *;
-}
-
--keep public class halo.android.share.wx.**{
+-keep public class halo.android.integration.wx.**{
    public *;
    protected *;
 }
+# [END] integration-wx 混淆规则
+
+# [START] 微信SDK 混淆设置
+-keep class com.tencent.mm.opensdk.** {
+    *;
+}
+
+-keep class com.tencent.wxop.** {
+    *;
+}
+
+-keep class com.tencent.mm.sdk.** {
+    *;
+}
+# [START] 微信SDK 混淆设置
+

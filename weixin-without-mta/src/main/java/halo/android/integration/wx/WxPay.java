@@ -1,4 +1,4 @@
-package halo.android.share.wx;
+package halo.android.integration.wx;
 
 import android.content.Context;
 import android.webkit.WebView;
@@ -9,7 +9,7 @@ import com.tencent.mm.opensdk.modelpay.PayReq;
 import java.util.HashMap;
 import java.util.Map;
 
-import halo.android.share.wx.iml.WxPayResponseListener;
+import halo.android.integration.wx.iml.WxPayResponseListener;
 
 /**
  * Created by Lucio on 17/5/11.
@@ -131,7 +131,7 @@ public class WxPay {
      * @throws WxNotInstalledException
      */
     public static boolean senPayReq(Context context, String appId, BaseReq req) throws WxNotInstalledException {
-        return WeiXin.senReq(context, appId, req);
+        return Wx.senReq(context, appId, req);
     }
 
     /**

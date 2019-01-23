@@ -17,11 +17,13 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            consumerProguardFiles 'proguard-rules.pro'
         }
 
         debug {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            consumerProguardFiles 'proguard-rules.pro'
         }
     }
 }
@@ -31,4 +33,4 @@ dependencies {
     provided "com.android.support:support-annotations:$support_version"
 }
 
-//apply from:'./bintray.gradle'
+apply from:'./bintray.gradle'

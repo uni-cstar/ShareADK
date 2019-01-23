@@ -1,4 +1,4 @@
-package halo.android.share.wx;
+package halo.android.integration.wx;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,10 +18,10 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-import halo.android.share.wx.iml.IWxEntry;
-import halo.android.share.wx.iml.WxLoginResponseListener;
-import halo.android.share.wx.iml.WxPayResponseListener;
-import halo.android.share.wx.iml.WxShareResponseListener;
+import halo.android.integration.wx.iml.IWxEntry;
+import halo.android.integration.wx.iml.WxLoginResponseListener;
+import halo.android.integration.wx.iml.WxPayResponseListener;
+import halo.android.integration.wx.iml.WxShareResponseListener;
 
 /**
  * Created by Lucio on 17/5/12.

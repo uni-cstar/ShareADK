@@ -1,11 +1,11 @@
-package halo.android.share.wx;
+package halo.android.integration.wx;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import halo.android.share.wx.iml.IWxEntry;
+import halo.android.integration.wx.iml.IWxEntry;
 
 
 /**
@@ -18,7 +18,7 @@ public abstract class BaseWxEntryActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        wxEntry = WeiXin.createWxEntry(this, getWxAppID());
+        wxEntry = Wx.createWxEntry(this, getWxAppID());
         wxEntry.onActivityCreate();
     }
 

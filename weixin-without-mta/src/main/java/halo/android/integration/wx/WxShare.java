@@ -1,4 +1,4 @@
-package halo.android.share.wx;
+package halo.android.integration.wx;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -20,7 +20,11 @@ import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import halo.android.share.wx.iml.WxShareResponseListener;
+import halo.android.integration.wx.iml.WxShareResponseListener;
+
+import static halo.android.integration.wx.WxShare.ShareTo.FAVORITE;
+import static halo.android.integration.wx.WxShare.ShareTo.SESSION;
+import static halo.android.integration.wx.WxShare.ShareTo.TIME_LINE;
 
 /**
  * Created by Lucio on 17/5/10.
@@ -34,27 +38,25 @@ public class WxShare {
     private static final int THUMB_SIZE = 150;
 
     /**
-     * 朋友圈
-     */
-    public static final int SendToTimeLine = SendMessageToWX.Req.WXSceneTimeline;
-
-    /**
-     * 收藏
-     */
-    public static final int SendToFavorite = SendMessageToWX.Req.WXSceneFavorite;
-
-    /**
-     * 好友会话
-     */
-    public static final int SendToSession = SendMessageToWX.Req.WXSceneSession;
-
-    /**
      * 分享目标类别
      */
-    @IntDef({SendToTimeLine, SendToFavorite, SendToSession})
+    @IntDef({TIME_LINE, FAVORITE, SESSION})
     @Retention(RetentionPolicy.SOURCE)
     public @interface ShareTo {
+        /**
+         * 朋友圈
+         */
+        int TIME_LINE = SendMessageToWX.Req.WXSceneTimeline;
 
+        /**
+         * 收藏
+         */
+        int FAVORITE = SendMessageToWX.Req.WXSceneFavorite;
+
+        /**
+         * 好友会话
+         */
+        int SESSION = SendMessageToWX.Req.WXSceneSession;
     }
 
     /**
@@ -169,9 +171,10 @@ public class WxShare {
     /**
      * @param bmp     bitmap
      * @param shareTo 分享到
+     * @param limitThumbSize  限制的缩略图大小
      * @return
      */
-    public static SendMessageToWX.Req buildImageShareReq(Bitmap bmp, @ShareTo int shareTo) {
+    public static SendMessageToWX.Req buildImageShareReq(Bitmap bmp, @ShareTo int shareTo,int limitThumbSize) {
         WXImageObject imgObj = new WXImageObject(bmp);
         Bitmap thumbBmp = null;
         boolean needRecycle = false;
@@ -182,6 +185,16 @@ public class WxShare {
             thumbBmp = bmp;
         }
         return buildImageShareReq(imgObj, shareTo, thumbBmp, needRecycle);
+    }
+
+    /**
+     * 创建图片分享（缩略图限制150大小，如需改变缩略图大小，见重构方法）
+     * @param bmp     bitmap
+     * @param shareTo 分享到
+     * @return
+     */
+    public static SendMessageToWX.Req buildImageShareReq(Bitmap bmp, @ShareTo int shareTo) {
+        return buildImageShareReq(bmp, shareTo,THUMB_SIZE);
     }
 
     /**
@@ -291,6 +304,13 @@ public class WxShare {
         return buildReq("webpage", shareTo, msg);
     }
 
+    /**
+     * 创建小程序参数
+     * @param webPageUrl 低于6.5.6的将打开该网页
+     * @param userName 小程序的原始Id
+     * @param path 小程序的path
+     * @return
+     */
     private static WXMiniProgramObject buildMiniProgramMsg(String webPageUrl, String userName, String path) {
         WXMiniProgramObject miniProgram = new WXMiniProgramObject();
         miniProgram.webpageUrl = webPageUrl;
@@ -311,19 +331,27 @@ public class WxShare {
      * @param path       小程序的path
      * @return
      */
-    public static SendMessageToWX.Req buildMiniProgramShare(String webPageUrl, String userName, String path, String title, String desc, byte[] thumbData) {
+    public static SendMessageToWX.Req buildMiniProgramShare(String webPageUrl, String userName, String path, String title, String desc, byte[] thumbData,@ShareTo int shareTo) {
         WXMiniProgramObject miniProgramObject = buildMiniProgramMsg(webPageUrl, userName, path);
         WXMediaMessage msg = buildMediaMessage(miniProgramObject, title, desc, thumbData);
-        return buildReq("webpage", SendToSession, msg);
+        return buildReq("webpage", shareTo, msg);
     }
 
-    public static SendMessageToWX.Req buildMiniProgramShare(String webPageUrl, String userName, String path, String title, String desc, Bitmap thumbData, boolean needRecycleThumbBmp) {
+    public static SendMessageToWX.Req buildMiniProgramShare(String webPageUrl, String userName, String path, String title, String desc, Bitmap thumbData, boolean needRecycleThumbBmp,@ShareTo int shareTo) {
         WXMiniProgramObject miniProgramObject = buildMiniProgramMsg(webPageUrl, userName, path);
         WXMediaMessage msg = buildMediaMessage(miniProgramObject, title, desc, thumbData, needRecycleThumbBmp);
-        return buildReq("webpage", SendToSession, msg);
+        return buildReq("webpage", shareTo, msg);
     }
 
+    /**
+     * 发送请求
+     * @param context
+     * @param appId
+     * @param req
+     * @return
+     * @throws WxNotInstalledException
+     */
     public static boolean senReq(Context context, String appId, BaseReq req) throws WxNotInstalledException {
-        return WeiXin.senReq(context, appId, req);
+        return Wx.senReq(context, appId, req);
     }
 }

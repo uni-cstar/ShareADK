@@ -1,4 +1,4 @@
-package halo.android.share.wx.model;
+package halo.android.integration.wx.model;
 
 /**
  * Created by Lucio on 17/5/12.

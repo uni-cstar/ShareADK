@@ -1,19 +1,20 @@
-package halo.android.share.wx.iml;
+package halo.android.integration.wx.iml;
 
 import android.app.Activity;
 
-import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
 
 /**
  * Created by Lucio on 17/5/12.
  */
 
-public interface WxShareResponseListener extends WxResponseListener {
+public interface WxLoginResponseListener extends WxResponseListener {
 
     /**
+     *
      * @param activity WxCallBackDelegate中包含的activity，通常指包名wxapi目录下定义的微信所需的activity
      * @param resp
      */
-    void onWxShareSuccess(Activity activity, SendMessageToWX.Resp resp);
+    void onWxLoginSuccess(Activity activity, SendAuth.Resp resp);
 
 }

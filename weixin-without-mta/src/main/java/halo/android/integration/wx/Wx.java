@@ -1,4 +1,4 @@
-package halo.android.share.wx;
+package halo.android.integration.wx;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,14 +7,14 @@ import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
-import halo.android.share.wx.iml.IWxEntry;
+import halo.android.integration.wx.iml.IWxEntry;
 
 
 /**
  * Created by Lucio on 17/5/16.
  */
 
-public class WeiXin {
+public class Wx {
 
     /**
      * 创建微信Entry的委托实现
