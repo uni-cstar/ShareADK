@@ -3,7 +3,7 @@ apply plugin: 'com.jfrog.bintray'
 
 def proj_version = '1.4'
 def proj_artifact_id = 'weixin-without-mta'
-def proj_group='halo.android.share'
+def proj_group='halo.android.integration'
 def proj_pom_name = 'WeiXin Integration for Android'
 
 def siteUrl = 'https://github.com/SupLuo/ShareADK'      // 项目的主页
