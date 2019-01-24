@@ -16,14 +16,9 @@
 #   public *;
 #}
 
--ignorewarnings
--optimizationpasses 5
--verbose
--dontskipnonpubliclibraryclasses
-
 #不混淆QQ的jar包
-#-libraryjars libs/open_sdk_r5923_lite_3.3.0.jar
 
+# [START] qq-sdk 混淆规则
 #忽略提醒
 -dontwarn com.tencent.connect.**
 -dontwarn com.tencent.open.**
@@ -39,15 +34,19 @@
 -keep class com.tencent.tauth.**{
     *;
 }
+# [END] qq-sdk 混淆规则
 
-#壳子中的混淆规则
--keepclassmembernames class easy.share.qq.**{
+# [START] integration-qq 混淆规则
+
+-keep public class halo.android.integration.qq.**{
+   public *;
+   protected *;
+}
+
+-keepclassmembernames class halo.android.integration.qq.**{
     public *;
     protected *;
 }
 
--keep public class easy.share.qq.**{
-   public *;
-   protected *;
-}
+# [END] integration-qq 混淆规则
 
