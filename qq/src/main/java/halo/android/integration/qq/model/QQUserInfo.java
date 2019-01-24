@@ -1,4 +1,4 @@
-package halo.android.qq.model;
+package halo.android.integration.qq.model;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,6 +1,6 @@
-package halo.android.qq.impl;
+package halo.android.integration.qq.impl;
 
-import halo.android.qq.model.QQUserInfo;
+import halo.android.integration.qq.model.QQUserInfo;
 
 /**
  * Created by Lucio on 17/5/15.

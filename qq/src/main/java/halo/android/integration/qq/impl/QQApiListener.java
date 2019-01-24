@@ -1,6 +1,6 @@
-package halo.android.qq.impl;
+package halo.android.integration.qq.impl;
 
-import halo.android.qq.model.QQApiResult;
+import halo.android.integration.qq.model.QQApiResult;
 
 /**
  * Created by Lucio on 17/5/15.

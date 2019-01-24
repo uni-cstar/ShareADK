@@ -1,4 +1,4 @@
-package halo.android.qq.impl;
+package halo.android.integration.qq.impl;
 
 /**
  * Created by Lucio on 17/5/15.

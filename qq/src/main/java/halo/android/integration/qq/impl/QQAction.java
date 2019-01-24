@@ -1,4 +1,4 @@
-package halo.android.qq.impl;
+package halo.android.integration.qq.impl;
 
 import android.app.Activity;
 import android.content.Intent;

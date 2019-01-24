@@ -1,7 +1,6 @@
-package halo.android.qq.impl;
+package halo.android.integration.qq.impl;
 
 import com.tencent.tauth.IUiListener;
-import com.tencent.tauth.UiError;
 
 /**
  * Created by Lucio on 17/5/15.

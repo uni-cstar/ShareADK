@@ -1,4 +1,4 @@
-package halo.android.qq.model;
+package halo.android.integration.qq.model;
 
 import com.tencent.connect.auth.QQToken;
 import com.tencent.connect.common.Constants;

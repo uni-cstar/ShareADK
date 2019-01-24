@@ -1,4 +1,4 @@
-package halo.android.qq;
+package halo.android.integration.qq;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,14 +14,14 @@ import com.tencent.tauth.UiError;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import halo.android.qq.impl.QQAction;
-import halo.android.qq.impl.QQCallBackListener;
-import halo.android.qq.impl.QQLoginListener;
-import halo.android.qq.impl.QQShareListener;
-import halo.android.qq.impl.QQUserInfoListener;
-import halo.android.qq.model.QQApiResult;
-import halo.android.qq.model.QQAuthInfo;
-import halo.android.qq.model.QQUserInfo;
+import halo.android.integration.qq.impl.QQAction;
+import halo.android.integration.qq.impl.QQCallBackListener;
+import halo.android.integration.qq.impl.QQLoginListener;
+import halo.android.integration.qq.impl.QQShareListener;
+import halo.android.integration.qq.impl.QQUserInfoListener;
+import halo.android.integration.qq.model.QQApiResult;
+import halo.android.integration.qq.model.QQAuthInfo;
+import halo.android.integration.qq.model.QQUserInfo;
 
 /**
  * Created by Lucio on 17/5/15.

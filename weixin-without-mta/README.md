@@ -33,6 +33,14 @@
                android:taskAffinity="net.sourceforge.simcpux"
                android:launchMode="singleTask">
            </activity>
+
+           //如果用到微信支付，定义支付界面
+            <activity
+              android:name=".wxapi.WXPayEntryActivity"
+              android:exported="true"
+              android:launchMode="singleTask">
+            </activity>
+
         ```
         常规使用微信的登录分享等功能，只需让WxEntryActivity 继承BaseWxEntryActivity即可或者
         仿造完成自己所需的特定逻辑。

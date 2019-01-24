@@ -1,11 +1,11 @@
-package halo.android.qq;
+package halo.android.integration.qq;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.tencent.connect.common.Constants;
 
-import halo.android.qq.model.QQAuthInfo;
+import halo.android.integration.qq.model.QQAuthInfo;
 
 /**
  * Created by Lucio on 17/5/15.

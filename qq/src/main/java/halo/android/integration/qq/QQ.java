@@ -1,4 +1,4 @@
-package halo.android.qq;
+package halo.android.integration.qq;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,7 +13,8 @@ import com.tencent.tauth.Tencent;
 
 import java.util.ArrayList;
 
-import halo.android.qq.impl.QQAction;
+import halo.android.integration.qq.impl.QQAction;
+
 
 /**
  * Created by Lucio on 17/5/15.
