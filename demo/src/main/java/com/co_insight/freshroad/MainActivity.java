@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 
-import halo.android.share.wx.WxShare;
+import halo.android.integration.wx.WxShare;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
         SendMessageToWX.Req req = WxShare.buildWebPageShare("http://www.baidu.com","测试分享","测试描述",
-                BitmapFactory.decodeResource(this.getResources(),R.drawable.wx_img),true,WxShare.SendToSession);
+                BitmapFactory.decodeResource(this.getResources(),R.drawable.wx_img),true,WxShare.ShareTo.SESSION);
 //        try {
 //            WxShare.senReq(this,"wx89b05d2c974cf4f4",req);
 //        } catch (WxNotInstalledException e) {

@@ -16,8 +16,8 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
-import halo.android.share.wx.WxNotInstalledException;
-import halo.android.share.wx.WxPay;
+import halo.android.integration.wx.WxNotInstalledException;
+import halo.android.integration.wx.WxPay;
 
 public class WxShareActivity extends AppCompatActivity implements IWXAPIEventHandler {
 
