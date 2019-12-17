@@ -1,4 +1,4 @@
-package halo.android.integration.wx;
+package andmy.integration.wx;
 
 import android.content.Context;
 import android.webkit.WebView;
@@ -9,7 +9,7 @@ import com.tencent.mm.opensdk.modelpay.PayReq;
 import java.util.HashMap;
 import java.util.Map;
 
-import halo.android.integration.wx.iml.WxPayResponseListener;
+import andmy.integration.wx.iml.WxPayResponseListener;
 
 /**
  * Created by Lucio on 17/5/11.

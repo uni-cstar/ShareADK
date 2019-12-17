@@ -1,11 +1,11 @@
-package halo.android.integration.wx;
+package andmy.integration.wx;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import halo.android.integration.wx.iml.IWxEntry;
+import andmy.integration.wx.iml.IWxEntry;
 
 
 /**

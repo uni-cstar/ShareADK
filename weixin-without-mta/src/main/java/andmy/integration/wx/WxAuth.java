@@ -1,10 +1,12 @@
-package halo.android.integration.wx;
+package andmy.integration.wx;
 
 import android.content.Context;
 
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 
-import halo.android.integration.wx.iml.WxLoginResponseListener;
+import andmy.integration.wx.model.WxAccessToken;
+import andmy.integration.wx.model.WxUserInfo;
+import andmy.integration.wx.iml.WxLoginResponseListener;
 
 /**
  * Created by Lucio on 17/5/12.
@@ -49,8 +51,8 @@ public class WxAuth {
 
     /**
      * 获取微信AccessToken的url
-     * api请求 Get方式 返回结果参考{@link halo.android.integration.wx.model.WxAccessToken}
-     * 请求是否成功 {@link halo.android.integration.wx.model.WxAccessToken#isSuccess()}
+     * api请求 Get方式 返回结果参考{@link WxAccessToken}
+     * 请求是否成功 {@link WxAccessToken#isSuccess()}
      *
      * @param appId  应用唯一标识，在微信开放平台提交应用审核通过后获得
      * @param secret 应用密钥AppSecret，在微信开放平台提交应用审核通过后获得
@@ -65,8 +67,8 @@ public class WxAuth {
      * 刷新access_token有效期
      * 1. 若access_token已超时，那么进行refresh_token会获取一个新的access_token，新的超时时间；
      * 2. 若access_token未超时，那么进行refresh_token不会改变access_token，但超时时间会刷新，相当于续期access_token。
-     * api请求 Get方式 返回结果参考{@link halo.android.integration.wx.model.WxAccessToken}
-     * 请求是否成功 {@link halo.android.integration.wx.model.WxAccessToken#isSuccess()}
+     * api请求 Get方式 返回结果参考{@link WxAccessToken}
+     * 请求是否成功 {@link WxAccessToken#isSuccess()}
      *
      * @param appId        应用唯一标识
      * @param refreshToken 填写通过access_token获取到的refresh_token参数
@@ -78,11 +80,11 @@ public class WxAuth {
 
     /**
      * 获取微信用户信息
-     * api请求 Get方式 返回结果参考{@link halo.android.integration.wx.model.WxUserInfo}
-     * 请求是否成功 {@link halo.android.integration.wx.model.WxUserInfo#isSuccess()}
+     * api请求 Get方式 返回结果参考{@link WxUserInfo}
+     * 请求是否成功 {@link WxUserInfo#isSuccess()}
      *
      * @param accessToken 调用凭证
-     * @param openid      普通用户的标识，对当前开发者帐号唯一 {@link halo.android.integration.wx.model.WxUserInfo}
+     * @param openid      普通用户的标识，对当前开发者帐号唯一 {@link WxUserInfo}
      * @return
      */
     public static String getUserInfoUrl(String accessToken, String openid) {

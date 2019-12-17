@@ -1,4 +1,4 @@
-package halo.android.integration.wx;
+package andmy.integration.wx;
 
 import android.os.Bundle;
 import android.text.TextUtils;

@@ -1,4 +1,5 @@
 
+
 ## 使用步骤
     # 工程配置
         1、在工程的build.gradle文件中配置以下语句
@@ -108,3 +109,7 @@ signingConfigs {
     }
 }
 ```
+
+## 附带：[官方链接](https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Access_Guide/Android.html)
+
+[关于微信分享 用户取消分享收到的回调也是成功的原因](https://open.weixin.qq.com/cgi-bin/announce?spm=a311a.9588098.0.0&action=getannouncement&key=11534138374cE6li&version=)

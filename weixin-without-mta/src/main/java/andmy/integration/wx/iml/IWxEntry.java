@@ -1,4 +1,4 @@
-package halo.android.integration.wx.iml;
+package andmy.integration.wx.iml;
 
 import android.content.Intent;
 

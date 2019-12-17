@@ -1,10 +1,10 @@
-package halo.android.integration.wx;
+package andmy.integration.wx;
 
 /**
  * Created by Lucio on 17/5/11.
  */
 
-public class WxNotInstalledException extends Exception{
+public class WxNotInstalledException extends RuntimeException{
     public WxNotInstalledException() {
         super();
     }

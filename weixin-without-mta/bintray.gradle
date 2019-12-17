@@ -1,9 +1,9 @@
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-def proj_version = '1.4'
+def proj_version = '1.7'
 def proj_artifact_id = 'weixin-without-mta'
-def proj_group='halo.android.integration'
+def proj_group = 'andmy.integration'
 def proj_pom_name = 'WeiXin Integration for Android'
 
 def siteUrl = 'https://github.com/SupLuo/ShareADK'      // 项目的主页
@@ -20,7 +20,7 @@ install {
                 groupId proj_group
                 artifactId proj_artifact_id
                 version proj_version
-                packaging 'jar'
+                packaging 'aar'
                 // Add your description here
                 name proj_pom_name    //项目描述
                 url siteUrl
@@ -53,10 +53,15 @@ task sourcesJar(type: Jar) {
 }
 task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
-    options.encoding = "utf-8"
-//    加入第三方依赖
-    classpath += project.files(configurations.compile.files,android.getBootClasspath().join(File.pathSeparator))
-//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    //    加入第三方依赖
+    classpath += project.files(configurations.compile.files, android.getBootClasspath().join(File.pathSeparator))
+
+    //下面两句，如果你的项目中有中文注解，最好加上，否则上传可能报错，最后的建议是全部加上
+    options.encoding "UTF-8"
+    options.charSet 'UTF-8'
+
+    //如果上传报错找到什么suppert-v4什么的，需要加上这句，最后的建议是全部加上
+    failOnError false
 }
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'

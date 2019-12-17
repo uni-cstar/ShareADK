@@ -1,4 +1,4 @@
-package halo.android.integration.wx;
+package andmy.integration.wx;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,10 +18,10 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-import halo.android.integration.wx.iml.IWxEntry;
-import halo.android.integration.wx.iml.WxLoginResponseListener;
-import halo.android.integration.wx.iml.WxPayResponseListener;
-import halo.android.integration.wx.iml.WxShareResponseListener;
+import andmy.integration.wx.iml.IWxEntry;
+import andmy.integration.wx.iml.WxLoginResponseListener;
+import andmy.integration.wx.iml.WxPayResponseListener;
+import andmy.integration.wx.iml.WxShareResponseListener;
 
 /**
  * Created by Lucio on 17/5/12.
@@ -71,7 +71,7 @@ class WxCallBackDelegate implements IWXAPIEventHandler, IWxEntry {
 
     @Override
     public void onResp(BaseResp baseResp) {
-        Log.d(TAG, "onResp:" + baseResp.errCode);
+        Log.d(TAG, "onResp: code=" + baseResp.errCode + " type=" + baseResp.getType());
         try {
 
             int type = baseResp.getType();
@@ -86,7 +86,6 @@ class WxCallBackDelegate implements IWXAPIEventHandler, IWxEntry {
                 //微信登陆
                 onLoginResp(baseResp);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -170,14 +169,12 @@ class WxCallBackDelegate implements IWXAPIEventHandler, IWxEntry {
             if (mLoginListeners == null) {
                 mLoginListeners = new ArrayList<>();
             }
-            if (mLoginListeners.contains(listener))
-                return;
+            if (mLoginListeners.contains(listener)) return;
             mLoginListeners.add(listener);
         }
 
         void removeAuth(WxLoginResponseListener listener) {
-            if (mLoginListeners == null)
-                return;
+            if (mLoginListeners == null) return;
             mLoginListeners.remove(listener);
         }
 
@@ -198,14 +195,12 @@ class WxCallBackDelegate implements IWXAPIEventHandler, IWxEntry {
             if (mShareListeners == null) {
                 mShareListeners = new ArrayList<>();
             }
-            if (mShareListeners.contains(listener))
-                return;
+            if (mShareListeners.contains(listener)) return;
             mShareListeners.add(listener);
         }
 
         void removeShareListener(WxShareResponseListener listener) {
-            if (mShareListeners == null)
-                return;
+            if (mShareListeners == null) return;
             mShareListeners.remove(listener);
         }
 
@@ -225,14 +220,12 @@ class WxCallBackDelegate implements IWXAPIEventHandler, IWxEntry {
             if (mPayListeners == null) {
                 mPayListeners = new ArrayList<>();
             }
-            if (mPayListeners.contains(listener))
-                return;
+            if (mPayListeners.contains(listener)) return;
             mPayListeners.add(listener);
         }
 
         void removePayListener(WxPayResponseListener listener) {
-            if (mPayListeners == null)
-                return;
+            if (mPayListeners == null) return;
             mPayListeners.remove(listener);
         }
 

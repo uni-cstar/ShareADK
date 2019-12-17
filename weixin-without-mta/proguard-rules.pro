@@ -17,12 +17,12 @@
 #}
 
 # [START] integration-wx 混淆规则
--keepclassmembernames class halo.android.integration.wx.**{
+-keepclassmembernames class andmy.integration.wx.**{
     public *;
     protected *;
 }
 
--keep public class halo.android.integration.wx.**{
+-keep public class andmy.integration.wx.**{
    public *;
    protected *;
 }

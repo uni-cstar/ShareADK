@@ -1,4 +1,4 @@
-package halo.android.integration.wx;
+package andmy.integration.wx;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,7 +7,7 @@ import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
-import halo.android.integration.wx.iml.IWxEntry;
+import andmy.integration.wx.iml.IWxEntry;
 
 
 /**

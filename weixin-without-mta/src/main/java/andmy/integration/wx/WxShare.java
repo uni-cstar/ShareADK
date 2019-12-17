@@ -1,4 +1,4 @@
-package halo.android.integration.wx;
+package andmy.integration.wx;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -20,11 +20,11 @@ import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import halo.android.integration.wx.iml.WxShareResponseListener;
+import andmy.integration.wx.iml.WxShareResponseListener;
 
-import static halo.android.integration.wx.WxShare.ShareTo.FAVORITE;
-import static halo.android.integration.wx.WxShare.ShareTo.SESSION;
-import static halo.android.integration.wx.WxShare.ShareTo.TIME_LINE;
+import static andmy.integration.wx.WxShare.ShareTo.FAVORITE;
+import static andmy.integration.wx.WxShare.ShareTo.SESSION;
+import static andmy.integration.wx.WxShare.ShareTo.TIME_LINE;
 
 /**
  * Created by Lucio on 17/5/10.
@@ -348,8 +348,8 @@ public class WxShare {
      * @param context
      * @param appId
      * @param req
-     * @return
-     * @throws WxNotInstalledException
+     * @return true 请求已发送
+     * @throws WxNotInstalledException 微信未安装
      */
     public static boolean senReq(Context context, String appId, BaseReq req) throws WxNotInstalledException {
         return Wx.senReq(context, appId, req);
