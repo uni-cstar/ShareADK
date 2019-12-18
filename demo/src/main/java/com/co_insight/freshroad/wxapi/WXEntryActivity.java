@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import halo.android.integration.wx.Wx;
-import halo.android.integration.wx.iml.IWxEntry;
+import andmy.integration.wx.Wx;
+import andmy.integration.wx.iml.IWxEntry;
 
 public class WXEntryActivity extends AppCompatActivity {
 

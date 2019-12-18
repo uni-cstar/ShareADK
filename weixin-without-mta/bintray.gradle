@@ -1,7 +1,7 @@
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-def proj_version = '1.7'
+def proj_version = '2.0'
 def proj_artifact_id = 'weixin-without-mta'
 def proj_group = 'andmy.integration'
 def proj_pom_name = 'WeiXin Integration for Android'
@@ -43,6 +43,7 @@ install {
                     developerConnection gitUrl
                     url siteUrl
                 }
+
             }
         }
     }

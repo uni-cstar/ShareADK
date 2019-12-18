@@ -31,4 +31,4 @@ dependencies {
     provided "com.android.support:support-v4:$support_version"
 }
 
-apply from:'./bintray.gradle'
+//apply from:'./bintray.gradle'
