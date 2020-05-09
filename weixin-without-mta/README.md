@@ -16,7 +16,7 @@
         ```
         2.在（app）module的build.gradle文件中配置依赖
         ```
-            compile('halo.android.share:weixin-without-mta:1.4')
+            compile('andmy.integration:weixin-without-mta:2.0')
             //依赖了support-annotations，版本号根据自己项目所使用support系列版本确定
             compile "com.android.support:support-annotations:${versions.supportLibrary}"
         ```

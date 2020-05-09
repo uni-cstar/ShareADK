@@ -2,7 +2,7 @@
 
   具体使用：
   
-  [微信](https://github.com/SupLuo/ShareADK/blob/master/weixin/README.md)
+  [微信](https://github.com/SupLuo/ShareADK/blob/master/weixin-without-mta/README.md)
   
   [QQ](https://github.com/SupLuo/ShareADK/blob/master/qq/README.md)
   
