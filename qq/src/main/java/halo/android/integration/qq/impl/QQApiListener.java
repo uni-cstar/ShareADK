@@ -6,7 +6,7 @@ import halo.android.integration.qq.model.QQApiResult;
  * Created by Lucio on 17/5/15.
  */
 
-interface QQApiListener {
+public interface QQApiListener {
     void onQQApiFailed(QQApiResult error);
     void onQQApiCancel();
 }

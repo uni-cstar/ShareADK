@@ -6,7 +6,7 @@ import android.app.Activity;
  * Created by Lucio on 17/5/12.
  */
 
-interface WxResponseListener {
+public interface WxResponseListener {
 
     /**
      * @param activity WxCallBackDelegate中包含的activity，通常指包名wxapi目录下定义的微信所需的activity
