@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    compile 'com.sina.weibo.sdk:core:2.0.3:openDefaultRelease@aar'
+    api 'com.sina.weibo.sdk:core:2.0.3:openDefaultRelease@aar'
 }
 
 //apply from:'./bintray.gradle'

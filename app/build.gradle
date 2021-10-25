@@ -44,7 +44,8 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:appcompat-v7:$support_version"
-    compile project(':alipay')
-    compile project(':weixin-without-mta')
+    implementation "com.android.support:appcompat-v7:$support_version"
+    implementation project(':alipay')
+    implementation project(':weixin-without-mta')
+    implementation project(path: ':qq')
 }

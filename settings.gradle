@@ -1,1 +1,1 @@
-include ':app', ':alipay', ':weixin-without-mta', ':qq', ':sina', ':demo'
+include ':app', ':alipay', ':weixin-without-mta', ':qq',  ':demo'
